@@ -1,5 +1,5 @@
-today i have completed program which was provided by you. 
-In that i learned how to create repository, branch,  how to generate SSH key and copied that ssh key in the github. I faced some errors in copied that key, after searching i solved. 
-Then i learned how to clone project in local machine and also basic of them i tried. Then i performed some git commands like, remote, fetch, status, add, push, commit, merge . 
-In that i faced some errors in merging command. but when you solved that error in the 3 to 4 pm. session then i competed that also.
-That's very new things for me, & that was very interesting.
+Today I have completed Git Workflow with GitHub which was provided by you. 
+In that I learned how to create repository, branch, how to generate SSH key and copied that ssh key in the github. I faced some errors in coping that key but after some research I have solved. 
+Then I learned how to clone project in local machine and also I have tried basic of them. Then I performed some git commands like, remote, fetch, status, add, push, commit, merge . 
+In that i faced some errors in merging command but when you solved that error in the 3 to 4 pm session then I competed that also.
+That's very new things for me and that was very interesting.

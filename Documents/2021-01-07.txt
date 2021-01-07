@@ -1,0 +1,7 @@
+Today I learned if there are multiple branches then how can we merge all the files of that branches. 
+I got some errors in that but after research I solved it. 
+I performed commands related to the merging files and also performed how to remove the files from the particular or multiple branches. 
+Then I learned why we use git rebase commands and how that command differs from the merge command. 
+I faced little beat difficulty to understand that difference but when you told in session then I much better understood. 
+I performed git rebase, git pull rebase , got rebase continue, git remote show , git ls-remote commands. 
+Then I learned how to recover the old code using checkout command. Then I learned git squash command and performed it.

@@ -1,0 +1,6 @@
+Today I referred Javascript videos which was send by you and performed some practicals related the video. That was useful for me. 
+Then I performed some tag in html like table tag, th, td, tr, colspan, rowspan, thead, tbody, tfoot, div which are used to create table. 
+I performed "&nbsp" for the white space, "br" tag for break the line.
+I performed List related tags. 
+Then I performed HTML practical and js code challenges  which was given by you. 
+In that I faced some difficulties but after research I solved it.

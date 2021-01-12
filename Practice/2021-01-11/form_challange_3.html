@@ -1,0 +1,29 @@
+<!-- Only .pdf file is uploaded not another -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML_Challange_pdf</title>
+</head>
+<body>
+	<h3>Upload File</h3>
+	<input type="file" id="try" name="try"><br><br>
+	<button type="button" onclick="myFunction()">Upload</button>
+
+	<p id="demo"></p>
+	<script type="text/javascript">
+		function myFunction(){
+			var str = document.getElementById('try').value;
+			if (!str.includes(".pdf",0))
+			{
+				document.getElementById("demo").innerHTML = "You can't upload another file.";
+				document.getElementById("try").value = "";
+			}
+			else
+			{
+				document.getElementById("demo").innerHTML = "You have upload file successfully..!";
+			}
+		}
+	</script>
+
+</body>
+</html>

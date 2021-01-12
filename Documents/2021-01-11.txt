@@ -1,0 +1,14 @@
+Today I performed css propery like
+ - height,width
+ - margin
+ - padding
+ - image radius (for  round image)
+ - display : flex, justify-content. (side by side  multiple image in html page)
+ - box-shadow : 1px 2px 10px rgba()(for shadow the image or box using their x y z axis) 
+ 
+I learned form structure using HTML. In that I learned and performed tags like lable,input, etc.
+I learned why we use radio button, checkbox, for, id, name, etc.
+I performed today's html practice 2 and 3.
+
+
+

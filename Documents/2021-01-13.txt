@@ -1,0 +1,17 @@
+Today I learned 
+ DOM (Data Object Manipulation) :
+    -  It is a structure representation of HTML document.
+    - It is use to connect webpage to script like js.
+    - For each HTML box, there is an onject in the DOM that we can access and interact with.
+
+HTML use for content and CSS use for presentation.
+
+DOM access and manipulation 
+
+Event : Notifications that are sent to notify the code that something happned on webpages, 
+   eg., clicking button, scrolling up and down etc.
+
+Event Listener : A function that performs action based on certain event.
+
+I performed today's javaScript challanges.
+In that I faced some error but after some research I solved it.

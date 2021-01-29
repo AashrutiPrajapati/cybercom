@@ -1,0 +1,26 @@
+Objects in JavaScript :
+     - Primitives : numbers, strings, booleans, undefined, null 
+     - Everything else : array, functions, objects, dates, wrappers for numbers
+Constructor and intances :
+     - The constuctor's prototype property is NOT the prototype of constructor itself, it's the prototype of ALL intances that are created throught it.
+
+Inheritance in js : Prototypes and Prototype Chain
+    - Every JavaScript object has a prototype property, which makes inheritance possible in js.
+    - The  prototypes  property of an object is where we put methods and properties that we want other objects to inherit.
+    - PRTOTYPE CHAIN : When certain method is called, the search starts in object itself, and if it cannot be found, the search moves on to the object's prototype. This continues until the method is found prototype chain. ( Then Performed prototype chain on the console. )
+
+john.hasOwnProperty('job') : true and  john.hasOwnProperty('lastName') : false ...it means 1st is the jhon's property and 2nd property is inherited property. 
+So, john intenceof Person : true 
+
+Learned about Object.create : used for directly create object on console.
+Practiced on peimitives vs objects, object functions, object.create.
+
+Functions are also objects in js:
+   - Function is an intance of the object type; it behaves like any other object; 
+      we can store functions in a variable; we can pass it as an argument to another function;
+      we vcan return a function from a function. 
+   - First class functions passing functions as arguments.
+
+
+
+

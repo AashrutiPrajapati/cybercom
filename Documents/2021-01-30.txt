@@ -1,0 +1,27 @@
+Firstclass functions in js : It means, functions in a code are treated like any other variable. 
+     - i.e, function can be passed as an argument to other function, 
+       can be return by another function, 
+       can be assigned as a value to variable.  
+Then performed practice code on that in js.
+
+ IIFE : Immediately Invoked Function Expressions
+      - It is a way to execute functions immediately, at that time when they are created, (or as soon as it is defined.)
+
+Closures : It is a feature in js where an inner function has access to outer function's variable. It has three scope chains.
+      - Inner function has always access to the variables and parameters of its outer function, even after the outer function had returned.
+
+Bind, call and apply : These methods are used to set this keyword independent of how a function is called.
+       - Bind() : Creates a copy of the function and set this keyword.
+       - Call() & apply() : Set the this keyword and calls the function immediately.  
+
+Learned about ES6/ES2015 version of js. 
+        - Features of this :  Variable declarations with let const, Blockes and IIFEs, Arrow fun., destructuring, arrays maps etc..
+
+Let and const in js : Both are new features cam out with ES2015(ES6).
+        - Const is a signal that the identifier won't be reassigned. Const can only be accessed within the block they were declared.
+        - Let is preferred for variable declaration. Variable declared in block with 'let' is only available for use within that block.
+ 
+Strings in ES5/ES6 : In this learned some default string fun. 
+        - startsWith(), endsWith(), includes(), repeat()
+            
+Performed js challanege programs.

@@ -1,0 +1,46 @@
+Learned and performed array related code in php.
+        - Associative array
+        - Multi-dimensional array
+        - For each statement : Used for looping through the values of an array or we can say that used to loop through each key/value pair in an array. It is loops over the array and each value for current array elements is assigned to $value.
+                -- syntax:  foreach ($variable as $key => $value) { # code...}
+
+Include and require function in php : 
+         - It is very useful when you want to include the same php,html,or text on multiple pages of a website.
+ 	eg., include 'file name';
+         - include() statement will only generate a php warning but allow script execution to continue if file include can't found, 
+         - require() statement will generate a fatal error and stop the script execution or kill rest of page. 
+
+include_once and require_once : Difference from the include() is only that if the code from a file has already been included, it will not be included again and it's returns true.  
+
+Learned and performed string functions :
+           - preg_match : check there is a space or not in string, and match the string.
+           - strlen : find the length of string or how many characters are present in the string.
+           - upper_Lower case conversion : 
+           - strpos() : In this three arg. are there. Used to find the position of string.
+           - substr_replace() : used to replaced the substring of the string. In this three args are present.
+           - str_replace() : used replace the string.
+Then I learned word censoring in the php page : In that i learned how can we replace the staring word, find string when we write some statements in the textarea of any form and other operations.
+
+Performed timestamps function in the php : time(), date(), modifying timestamps.
+Performed and learned random number generation function in php : rand(), getrandmax(), eg., rand(1,7) used for no. rolled between 1 to 7.  
+
+Learned about $_SERVER variables : 
+            - $_SERVER ['SCRIPT_NAME'];
+            - $_SERVER ['HOST_NAME'];
+Learned about header function in php : header() - used to redirect the page. eg., header('Location : '.$redirect_page);
+            - ob_start() : used storing an output in the buffer
+            - on_end_flush() : used to flushing an output in buffer
+Learned about how we visitors IP address : eg., $_SERVER['REMOTE_ADDR'];  or used $_SERVER['HTTP_CLIENT_IP']; or used $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+Learned about browser related functions in php : eg., get_browser(null, true); if write this and run on chrome then print crome at the page or if run in the firefox then display firefox.
+
+Learned and performed GET and POST functions in php. 
+Learned and performed htmlentities() function : It is an inbuilt function in php which is used to transform all characters which are applicable to HTMLentities. 
+
+Learned and performed Session related code : session setting and session unsetting in php
+Learned and performed Cookies realated code : 
+              - setcookie(' ' ,' ',' '): three args are in this , (name,value,expression)'
+
+ 
+
+

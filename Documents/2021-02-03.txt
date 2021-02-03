@@ -1,0 +1,4 @@
+Today I learned how to create a form in php form the given videos.
+Then I have create some basic forms and display their form details which are submitted on same page.
+I learned some new function and topics related to the forms.
+Then I created one user form with validation. I have faced some error in that. then i performed validation using php then i completed that form. 

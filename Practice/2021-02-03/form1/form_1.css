@@ -1,0 +1,51 @@
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 20px;
+
+}
+.form{
+	width: 100%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.main{
+	padding: 1px;
+	width: 90%;
+	border: 2px solid black;
+}
+.line1{
+	width: 100%;
+	color: red; 
+	font-size: 20px;
+	text-align: center; 
+	background: yellow;
+	
+}
+.lines{
+	width: calc(100% - 20px);
+	background-color: lightgreen;
+}
+.main td{
+	padding: 5px 10px;
+	margin: 5px;
+	background-color: lightblue;
+}
+.last_line{
+	text-align: center;
+	font-size: 15px;
+	padding: 7px 75px;
+	background-color: lightgreen;
+}
+.details{
+	width: 100%;
+	padding: 20px;
+
+}
+.error{
+	color: red;
+}

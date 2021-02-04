@@ -74,7 +74,7 @@
 
     ?>
     <div style="width: 50%">
-	<form class='form' action="user_form.php" method="POST" name="uform">
+	<form class='form' action="form_1.php" method="POST" name="uform">
 	<table class='main' border="1" cellspacing="5">
 		<tr>
 			<td class='line1' style="background-color: yellow"colspan="2">User Form</td>

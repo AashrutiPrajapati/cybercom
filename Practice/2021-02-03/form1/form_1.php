@@ -104,11 +104,13 @@
 				<input type="checkbox" name="game">Volleyball
 			</td>
 		</tr>
+		<tr>
 			<td>Gender</td>
 			<td><input type="radio" name="gender" value="Male"> Male
 				<input type="radio" name="gender" value="Female">Female
 				<span class="error"><?php echo $genderErr;?></span>
 			</td>
+		</tr>
 		<tr>
 			<td>Select ur age</td>
 			<td><select name='age' style="width: calc(100% - 20px);background-color: lightgreen;">

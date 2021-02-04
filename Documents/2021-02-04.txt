@@ -1,0 +1,6 @@
+I learned some new function and topics related to the forms in php .
+I learned how to validate php form with javascript.
+Then I performed some basic form validation.
+After then i completed my another 2 forms with JS validation.
+I have faced some error in that. But searching on that error i finally completed my forms.
+ 

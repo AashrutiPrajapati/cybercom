@@ -1,0 +1,15 @@
+Today I learned what is database how can we create in mysql. 
+Learned how we can  create table and fileds in the database using queries. 
+Then I learned how to connect with server and database in php.
+            	- mysqli_connect("hostname","username","password") : three agrs are there .
+	- In the connection part i faced some error , but searching on google i found that and filnally connect to the database.
+Then performed mysqli_query() function for fetch the data from the database :
+	- mysqli_query(connection, query): two perameters are used in the arg.
+	- mysqli_fetch_assco(): Used to fetch the data from the database.
+	- performed another oprations on the php code related to the database.
+
+Then I performed basic QUERIES on the phpMyAdmin : like SELECT, UPDATE, INSERT, DELETE etc.
+Then I performed database connectivity in form.
+I learned php database connection functions and performed that.
+
+ 

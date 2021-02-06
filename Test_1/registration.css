@@ -1,0 +1,65 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	/*display: flex;
+	text-align: center;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.outer{
+	width: 30%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 20px;
+}
+.form{
+	border: 1px solid black;
+	width: 100%;
+
+}
+
+.details{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 20px;
+	
+	
+}
+.box{
+	width: 65%;
+	padding: 5px;
+	margin: 5px;
+	
+}
+.box1{
+	width: 68%;
+	padding: 5px;
+	margin: 15px 5px;
+}
+.condition{
+	padding-left: 50px;
+	width: 80%;
+}
+
+.submit{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px 0px;
+}
+.sub{
+	background-color: orange;
+	color: white; 
+}
+.error{
+	color: red;
+}

@@ -4,45 +4,43 @@
 	<title>Registration Page</title>
 </head>
 <body>
-	<div class="main">
+	<div class="outer">
 		<h3>REGISTRATION</h3>
-	</div>
-	<form name="rform" method="POST" onSubmit="return regi()">
+
+	<form name="rform" method="POST" onSubmit="return regi()" class="form">
 		<div class="details">
-			<input type="text" name="name" placeholder="Name">
-			<span id='nameErr'></span>
+			<input type="text" name="name" placeholder="Name" class="box">
+			<span id='nameErr' class="error"></span><br>
 
-			<input type="email" name="email" placeholder="Email">
-			<span id='emailErr'></span>
+			<input type="email" name="email" placeholder="Email" class="box">
+			<span id='emailErr' class="error"></span><br>
 
-			<input type="password" name="pass" placeholder="Password">
-			<span id='passErr'></span>
-			<input type="password" name="cpass" placeholder="Confirm Password">
+			<input type="password" name="pass" placeholder="Password" class="box">
+			<span id='passErr' class="error"></span><br>
+			<input type="password" name="cpass" placeholder="Confirm Password" class="box">
 
-			<select name="city">
+			<select name="city" class="box1">
+				<option value="none" disabled selected hidden>Selecte city</option>
 				<option value="Anand">Anand</option>
 				<option value="Baroda">Baroda</option>
 				<option value="Ahamdabad">Ahamdabad</option>
 				<option value="Surat">Surat</option>
 				<option value="Rajkot">Rajkot</option>
 			</select>
-			<select name="state">
+			<select name="state" class="box1">
+				<option value="none" disabled selected hidden>Selecte state</option>
 				<option value="Gujarat">Gujarat</option>
 				<option value="Mumbai">Mumbai</option>
 				<option value="Kolkata">Kolkata</option>
-			</select>	
+			</select>
 
-			<input type="checkbox" id="condition"> Terms & Conditions
+			<div class="condition"><input type="checkbox" id="condition" style="padding: 10px"> Terms & Conditions</div>
 
-			<input type="submit" value="REGISTER" name="register">	
-			<div id="message"></div>
-			
-		</div>
-		<script type="text/javascript" src="registration.js"></script>
-		
+			<div class="submit"><input type="submit" value="REGISTER" name="register" class="sub"></div>	
+		</div>		
 	</form>
+	</div>
+	<div id="message"></div>
 	<script type="text/javascript" src="registration.js"></script>
-		
-
 </body>
 </html>

@@ -1,0 +1,36 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 50%;
+}
+.main{
+	border: 1px solid black;
+	/*border-radius: 20px;*/
+	width: 100%;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: white;
+}
+.form{
+	width: 100%;
+	padding: 5px;
+}
+.login_form{
+	padding: 5px;
+	width: 100%;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*flex-direction: column;*/
+
+}
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Page</title>
+</head>
+<body>
+	<div class="main">
+		<h3>REGISTRATION</h3>
+	</div>
+	<form name="rform" method="POST" onSubmit="return regi()">
+		<div class="details">
+			<input type="text" name="name" placeholder="Name">
+			<span id='nameErr'></span>
+
+			<input type="email" name="email" placeholder="Email">
+			<span id='emailErr'></span>
+
+			<input type="password" name="pass" placeholder="Password">
+			<span id='passErr'></span>
+			<input type="password" name="cpass" placeholder="Confirm Password">
+
+			<select name="city">
+				<option value="Anand">Anand</option>
+				<option value="Baroda">Baroda</option>
+				<option value="Ahamdabad">Ahamdabad</option>
+				<option value="Surat">Surat</option>
+				<option value="Rajkot">Rajkot</option>
+			</select>
+			<select name="state">
+				<option value="Gujarat">Gujarat</option>
+				<option value="Mumbai">Mumbai</option>
+				<option value="Kolkata">Kolkata</option>
+			</select>	
+
+			<input type="checkbox" id="condition"> Terms & Conditions
+
+			<input type="submit" value="REGISTER" name="register">	
+			<div id="message"></div>
+			
+		</div>
+		<script type="text/javascript" src="registration.js"></script>
+		
+	</form>
+	<script type="text/javascript" src="registration.js"></script>
+		
+
+</body>
+</html>

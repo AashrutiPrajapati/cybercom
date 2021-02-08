@@ -1,0 +1,14 @@
+Today I learned queries in sql, and performed queires related to some tables on phpMyAdmin.
+	- In this I performed LEFT JOIN , RIGHT JOIN opration on the two tables.
+	- Performed LIKE with a search engine queries on table.
+	- mysqli_real_escape_string($conn,$search_name) : function used to find something(like name) from database  table
+	- mysqli_num_rows() : Used to returns number of rows in recordset, and return false on failure.
+
+Then learned SELECT DISTINCT query and performed : Used to return the distinct values from the recordset.
+	- syntax: SELECT DISTINCT col_name FROM table_name;
+
+Then performed login and logout related code in php.
+Then I performed database related tables on phyMyAdmin.
+Then I performed queries on database table using php functions.
+I create Registration form and insert data into database tables, Fetch data from the database.
+ 

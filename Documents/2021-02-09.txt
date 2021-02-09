@@ -1,0 +1,6 @@
+Today I learned how we can insert data into database using php. In that I performed INSERT query in the php file then link that to database and insert data into database table.
+Then I learned how we can fetch data from the database and display taht data into the webpage using php  operations or queries.
+I performed CRUD operations on the database using php, html, css, js.
+	- CREATE, UPDATE, DELETE oerations on the data which are store in database and also display that changes on the web page.
+	- In that I faced some errors to update the data but after finding I compeleted that also.
+In that also I performed validation at server and client both side. 

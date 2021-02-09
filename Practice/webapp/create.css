@@ -1,0 +1,87 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.main{
+ 	background:rgb(21, 127, 226);
+    padding: 10px;
+    color: white;
+    display:flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.brand{
+                /* background:lightgreen; */
+    display: flex;
+    align-items: center;
+    flex:4;
+    margin-left:50px;
+	font-size: 20px;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    flex:1;
+	font-size: 15px;
+	color: white;
+}
+.navbar ul{
+    list-style:none;
+}
+.navbar ul li{
+    float:left;
+    margin: 0px 20px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: white;
+}
+.details{
+	margin: 0px 60px;
+	font-size: 20px;
+}
+.details hr{
+	border: 1px solid lightgray;
+}
+.cform{
+	
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	
+	width: 80%;
+	height: 500px;
+}
+.inner-form{
+	display: flex;
+}
+.form_fields{
+	flex:1;	
+}
+.lable{
+	padding: 2px 0px;
+	font-size: 15px;
+}
+.box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	width: 80%;;
+}
+.btn {
+	background-color: green;
+	color: white;
+	text-align: center;
+	margin-top: 50px;
+	padding: 10px 60px;
+	border: none;	
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 15px;
+	width: 20%;
+}
+.error{
+	color: red;
+	padding: 10px 0px;
+	font-size: 15px;
+}

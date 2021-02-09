@@ -1,0 +1,45 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+.main{
+    background:rgb(21, 127, 226);
+    padding: 10px;
+    color: white;
+    display:flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.brand{
+    display: flex;
+    align-items: center;
+    flex:4;
+    margin-left:50px;
+    font-size: 20px;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    flex:1;
+	font-size: 15px;
+	color: white;
+}
+.navbar ul{
+    list-style:none;
+}
+.navbar ul li{
+    float:left;
+    margin: 0px 20px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: white;
+}
+.details{
+	margin: 0px 60px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+
+}
+.details hr{
+	border: 1px solid lightgray;
+}

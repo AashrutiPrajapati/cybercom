@@ -1,0 +1,82 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.main{
+    padding: 20px;
+    color: white;
+    display:flex;
+    font-size: 1rem; 
+}
+
+.navbar{
+    display: flex;
+    justify-content:flex-end;
+	font-size: 15px;
+	color: black;
+    width: 100%;
+}
+.navbar ul{
+    list-style:none;
+}
+.navbar ul li{
+    float:left;
+    margin: 0px 10px;
+}
+.navbar ul li a{
+	text-decoration: none;
+    color:black;
+}
+.manage{
+    background-color:lightgreen;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.profile{
+    color: black;
+    background-color:lightblue;
+    padding: 5px 45px;
+    border-radius: 5px;
+}
+.logout{
+    color: black;
+    background-color:lightpink;
+    padding: 5px 55px;
+    border-radius: 5px;
+}
+.details{
+    margin: 0px 60px;
+	font-size: 20px;
+}
+.btn {
+	background-color: lightgreen;
+	color: black;
+	text-align: center;
+	padding: 10px 20px;
+	margin-top: 10px;
+	border: none;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;	
+	font-size: 15px;
+    border-radius: 5px;
+}
+.tab{
+	margin-top: 20px;
+	padding: 5px;
+	width: 90%;
+	border-collapse: collapse;
+    margin-left: 80px;
+}
+.tab tr th{
+	background-color: lightgray;
+	font-weight: 200;
+	border-right: none;
+	border-left: none;
+	text-align: left;
+	padding: 10px 0px;
+}
+.tab tr td{
+	padding: 5px;
+	border-right: none;
+	border-left: none;
+}

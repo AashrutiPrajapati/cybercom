@@ -1,0 +1,33 @@
+Today I learned and performed array function in php :
+	- array() : 
+	- array_change_key_case() : changes all keys in an array to lowercase or uppercase.
+  	     syntax : array_change_key_case (array,case)
+
+	- array_chunk() : splits an array into chunks of new arrays.
+	      syntax : array_chunk (array, size, preserve_key); where preserve_key is optional (used for true or false). 
+
+	- array_column() : returns the values from a single column in the input array.
+	       syntax : array_column (array, column_key, index_key)
+
+	- array_combine() : creates an array by using the elements from one "keys" array and one "values" array.Note: Both arrays must have equal number of elements.
+	       Syntax : array_combine (keys, value)
+
+	- array_count_values() : counts all the values of an array.
+	       Syntax : array_count_values(array)
+
+	- array_diff() : compares the values of two (or more) arrays, and returns the differences. This function compares the values of two (or more) arrays, and return an array that contains the entries from array1 that are not present in array2 or array3, etc
+	         Syntax : array_diff (array1, array2,...)
+
+	- array_diff_assoc() : compares the keys and values of two (or more) arrays, and returns the differences.
+	         Syntax : array_diff_assoc(array1,array2,array3...)
+
+	- array_diff_key () : compares the keys of two (or more) arrays, and returns the differences.
+	          Syntax : array_diff_key(array1, array2,...)
+
+	- array_diff_uassoc () : he array_diff_uassoc() function compares the keys and values of two (or more) arrays, and returns the differences. This function uses a user-defined function to compare the keys!
+	          Syntax : array_diff_uassoc(array1, array2, array3, ..., myfunction)
+
+	- array_diff_ukey() : compares the keys of two (or more) arrays, and returns the differences.  This function uses a user-defined function to compare the keys!
+
+	- array_fill() : fill an array with values.
+	           Syntax : array_fill(index, number, value)

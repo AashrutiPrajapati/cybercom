@@ -1,8 +1,8 @@
 <?php
 namespace Block\Admin\Product\Edit\Tabs;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class GroupPrice extends \Block\Core\Template
+class GroupPrice extends \Block\Core\Edit
 {
     protected $product = null;
     protected $customerGroup = null;

@@ -4,42 +4,31 @@ namespace Block\Core\Edit;
 
 class Tabs extends \Block\Core\Template
 {
-    public function setDefaultTab($defaultTab)
+    protected $tableRow = null;
+    protected $defaultTab = null;
+    protected $tabs = [];
+    
+    public function __construct() {
+        $this->setTemplate('./View/core/edit/tabs.php');
+        $this->prepareTabs();
+    }
+
+    public function setTableRow(\Model\Core\Table $tableRow)
     {
-        $this->defaultTab = $defaultTab;
+        $this->tableRow = $tableRow;
         return $this;
     }
-    public function getDefaultTab()
+
+    public function getTableRow()
     {
-        return $this->defaultTab;
-    }
-   
-    public function setTabs(array $tabs = []) {
-        $this->tabs = $tabs;
-        return $this;
-    }
-
-    public function getTabs() {
-        return $this->tabs;
-    }
-
-    public function addTab($key, $tab = []) {
-       
-        $this->tabs[$key] = $tab;
-        return $this;
-    }
-
-    // public function getTab($key) {
-    //     if (!array_key_exists($key, $this->tabs)) {
-    //         return null;
-    //     }
-    //     return $this->tabs[$key];
-    // }
-
-    public function removeTab($key) {
-        if (array_key_exists($key, $this->tabs)) {
-            unset($this->tabs[$key]);
+        if(!$this->tableRow){
+            $this->setTableRow();
         }
+        return $this->tableRow;
+    }
+
+    public function prepareTabs()
+    {
         return $this;
     }
 }

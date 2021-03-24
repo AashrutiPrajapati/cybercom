@@ -1,8 +1,8 @@
 <?php
 namespace Block\Admin\Customer\Edit\Tabs;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class Address extends \Block\Core\Template 
+class Address extends \Block\Core\Edit 
 {
     protected $address = [];
 

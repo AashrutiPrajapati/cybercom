@@ -5,8 +5,9 @@ namespace Block\Admin\Product;
 class Edit extends \Block\Core\Edit
 {
     public function __construct() {
-        //parent::__construct();
-        $this->setTemplate('./View/admin/product/update.php');
+        parent::__construct();
+        //$this->setTemplate('./View/admin/product/update.php');
+        $this->setTabClass(\Mage::getBlock('Block\Admin\Product\Edit\Tabs'));
     }
 
     // public function getTabContent() {

@@ -1,16 +1,16 @@
 <?php
 namespace Block\Core;
-\Mage::loadFileByClassName('Block\Core\Edit');
+\Mage::loadFileByClassName('Block\Core\Template');
 
 class Edit extends Template
 {
-    //protected $product = NULL;
     protected $tab = NULL;
     protected $tableRow = null;
+    protected $tabClass = null;
 
-    // public function __construct() {
-    //     $this->setTemplate('./View/admin/product/update.php');
-    // }
+    public function __construct() {
+        $this->setTemplate('./View/core/edit.php');
+    }
 
     public function getTabContent() {
         $tabBlock = $this->getTab();
@@ -23,6 +23,7 @@ class Edit extends Template
         //print_r($tabs[$tab]['block']);
         $blockClassName = $tabs[$tab]['block'];
         $block = \Mage::getBlock($blockClassName);
+        $block->setTableRow($this->getTableRow());
         echo $block->toHtml();
     }
 
@@ -34,7 +35,7 @@ class Edit extends Template
     public function setTab($tab = null)
     {
         if(!$tab){
-            $tab = \Mage::getBlock('Block\Admin\Product\Edit\Tabs');
+            $tab = $this->getTabClass();
         }
         $this->tab = $tab;
         return $this;
@@ -56,12 +57,25 @@ class Edit extends Template
 
     public function getTableRow()
     {
+        if(!$this->tableRow){
+            $this->setTableRow();
+        }
         return $this->tableRow;
     }
 
+    public function setTabClass($tabClass=null)
+    {
+        $this->tabClass = $tabClass;
+        return $this;
+    }
+
+    public function getTabClass()
+    {
+        if(!$this->tabClass){
+            $this->setTabClass();
+        }
+        return $this->tabClass;
+    }
 }
-
-
-
 
 ?>

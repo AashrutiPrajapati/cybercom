@@ -1,28 +1,30 @@
 <?php
 namespace Block\Admin\Attribute;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class Edit extends \Block\Core\Template
+class Edit extends \Block\Core\Edit
 {
     protected $attribute = null;
     public function __construct()
     {
-        $this->setTemplate('./View/admin/attribute/update.php');
+        parent::__construct();
+        $this->setTabClass(\Mage::getBlock('Block\Admin\Attribute\Edit\Tabs'));
+        //$this->setTemplate('./View/admin/attribute/update.php');
     }
 
-    public function getTabContent() {
-        $tabBlock = \Mage::getBlock('Block\Admin\Attribute\Edit\Tabs');
-        $tabs = $tabBlock->getTabs();
-        $tab = $this->getRequest()->getGet('tab', $tabBlock->getDefaultTab());
+    // public function getTabContent() {
+    //     $tabBlock = \Mage::getBlock('Block\Admin\Attribute\Edit\Tabs');
+    //     $tabs = $tabBlock->getTabs();
+    //     $tab = $this->getRequest()->getGet('tab', $tabBlock->getDefaultTab());
         
-        if(!array_key_exists($tab, $tabs)){
-            return null;
-        }
-        //print_r($tabs[$tab]['block']);
-        $blockClassName = $tabs[$tab]['block'];
-        $block = \Mage::getBlock($blockClassName);
-        echo $block->toHtml();
-    }
+    //     if(!array_key_exists($tab, $tabs)){
+    //         return null;
+    //     }
+    //     //print_r($tabs[$tab]['block']);
+    //     $blockClassName = $tabs[$tab]['block'];
+    //     $block = \Mage::getBlock($blockClassName);
+    //     echo $block->toHtml();
+    // // }
 
     // public function setAttribute($attribute = NULL){
     //     if ($attribute){

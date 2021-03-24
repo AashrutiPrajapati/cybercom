@@ -1,14 +1,14 @@
 <?php
 namespace Block\Admin\Customer;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class Edit extends \Block\Core\Template
+class Edit extends \Block\Core\Edit
 {
-    protected $customer = NULL;
 
     public function __construct() {
         parent::__construct();
-        $this->setTemplate('./View/admin/customer/update.php');
+        $this->setTabClass(\Mage::getBlock('Block\Admin\Customer\Edit\Tabs'));
+
     }
 
     // public function setCustomer($customer = NULL){
@@ -32,19 +32,6 @@ class Edit extends \Block\Core\Template
     //     return $this->customer;
     // }
 
-    public function getTabContent() {
-        $tabBlock = \Mage::getBlock('Block\Admin\Customer\Edit\Tabs');
-        $tabs = $tabBlock->getTabs();
-        $tab = $this->getRequest()->getGet('tab', $tabBlock->getDefaultTab());
-        
-        if(!array_key_exists($tab, $tabs)){
-            return null;
-        }
-        //print_r($tabs[$tab]['block']);
-        $blockClassName = $tabs[$tab]['block'];
-        $block = \Mage::getBlock($blockClassName);
-        echo $block->toHtml();
-    }   
 }
 
 ?>

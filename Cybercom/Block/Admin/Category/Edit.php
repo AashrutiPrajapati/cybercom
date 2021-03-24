@@ -1,57 +1,58 @@
 <?php
 namespace Block\Admin\Category;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class Edit extends \Block\Core\Template
+class Edit extends \Block\Core\Edit
 {
-    protected $category = NULL;
     protected $categories = NULL;
 
     public function __construct() {
         parent::__construct();
-        $this->setTemplate('./View/admin/category/update.php');
+        $this->setTabClass(\Mage::getBlock('Block\Admin\Category\Edit\Tabs'));
+
+        //$this->setTemplate('./View/admin/category/update.php');
     }
 
-    public function setCategory($category = NULL){
-        if ($category){
-            $this->category = $category;
-            return $this;
-        }
-        $category = \Mage::getModel('Model\Category');
+    // public function setCategory($category = NULL){
+    //     if ($category){
+    //         $this->category = $category;
+    //         return $this;
+    //     }
+    //     $category = \Mage::getModel('Model\Category');
 
-        if ($id = $_GET['id']){   
-            $category = $category->load($id);
-        }
-        $this->category = $category;
+    //     if ($id = $_GET['id']){   
+    //         $category = $category->load($id);
+    //     }
+    //     $this->category = $category;
         
-        return $this;
-    }
+    //     return $this;
+    // }
     
-    public function getCategory(){
-        if (!$this->category){
-            $this->setCategory();
-        }
-        return $this->category;
-    }
+    // public function getCategory(){
+    //     if (!$this->category){
+    //         $this->setCategory();
+    //     }
+    //     return $this->category;
+    // }
 
-    public function getTabContent() {
-        $tabBlock = \Mage::getBlock('Block\Admin\Category\Edit\Tabs');
-        $tabs = $tabBlock->getTabs();
-        $tab = $this->getRequest()->getGet('tab', $tabBlock->getDefaultTab());
+    // public function getTabContent() {
+    //     $tabBlock = \Mage::getBlock('Block\Admin\Category\Edit\Tabs');
+    //     $tabs = $tabBlock->getTabs();
+    //     $tab = $this->getRequest()->getGet('tab', $tabBlock->getDefaultTab());
         
-        if(!array_key_exists($tab, $tabs)){
-            return null;
-        }
-        //print_r($tabs[$tab]['block']);
-        $blockClassName = $tabs[$tab]['block'];
-        $block = \Mage::getBlock($blockClassName);
-        echo $block->toHtml();
-    }
+    //     if(!array_key_exists($tab, $tabs)){
+    //         return null;
+    //     }
+    //     //print_r($tabs[$tab]['block']);
+    //     $blockClassName = $tabs[$tab]['block'];
+    //     $block = \Mage::getBlock($blockClassName);
+    //     echo $block->toHtml();
+    // }
 
     public function setCategories($categories = NULL) {
         if(!$categories) {
             $categories = \Mage::getModel('Model\Category');
-            $categories = $categories->fetchAll()->getData();
+            $categories = $categories->fetchAll();
         }
         $this->categories = $categories;
         return $this;

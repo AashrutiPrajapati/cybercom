@@ -1,8 +1,8 @@
 <?php
 namespace Block\Admin\Product\Edit\Tabs;
-\Mage::loadFileByClassName('Block\Core\Template');
+\Mage::loadFileByClassName('Block\Core\Edit');
 
-class Category extends \Block\Core\Template
+class Category extends \Block\Core\Edit
 {
     public function __construct()
     {   

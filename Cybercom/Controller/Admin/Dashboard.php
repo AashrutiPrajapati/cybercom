@@ -14,4 +14,21 @@ class Dashboard extends \Controller\Core\Admin {
         $content->addChild($grid);
         echo $this->toHtmlLayout();
     }
+
+    // public function pageAction()
+    // {
+    //     $pager = \Mage::getController('Controller\Core\Pager');
+        
+    //     $sql = "SELECT * FROM product;";
+    //     $product = \Mage::getModel('Model\Product');
+    //     $productCount = $product->getAdapter()->fetchOne($sql);
+        
+    //     $pager->setTotalRecords($productCount);
+    //     $pager->setRecordPerPage(2);
+    //     $pager->setCurrentPage($_GET['p']);
+    //     $pager->calculate();
+    //     echo "<pre>";
+    //     print_r($pager);
+
+    // }
 }    

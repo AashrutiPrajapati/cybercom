@@ -55,9 +55,13 @@ class Shipping extends \Controller\Core\Admin {
 
     public function editAction(){
         try{
-            $edit =  \Mage::getBlock('Block\Admin\Shipping\Edit');
             $layout = $this->getLayout(); 
             $content = $layout->getChild('content');
+            $shipping = \Mage::getModel('Model\Shipping');
+            if ($id = $this->getRequest()->getGet('id')){   
+                $shipping = $shipping->load($id);
+            }
+            $edit =  \Mage::getBlock('Block\Admin\Shipping\Edit')->setTableRow($shipping);
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }

@@ -3,16 +3,16 @@ namespace Controller\Admin;
 \Mage::loadFileByClassName('Controller\Core\Admin');
 \Mage::loadFileByClassName('Block\Core\Layout');
 
-class CmsPage extends \Controller\Core\Admin {
-    protected $cmsPages = [];
+class Brand extends \Controller\Core\Admin
+{
+    protected $brands = [];
 
     public function gridAction (){
-        // echo __CLASS__;
-        // echo __FUNCTION__;
         try {
-            $grid = \Mage::getBlock('Block\Admin\CmsPage\Grid');
-            //$grid->setController($this);
-            $layout = $this->getLayout(); 
+            $layout = $this->getLayout();
+            $grid = \Mage::getBlock('Block\Admin\Brand\Grid');
+            // $grid->setController($this);
+             
             $layout->setTemplate('./View/core/layout/oneColumn.php');
             $content = $layout->getChild('content');
             $content->addChild($grid);
@@ -25,30 +25,29 @@ class CmsPage extends \Controller\Core\Admin {
 
     public function saveAction() {
         try{
-            $cmsPage = \Mage::getModel('Model\CmsPage');
+            $brand = \Mage::getModel('Model\Brand');
 
             if(!$this->getRequest()->isPost()){
                 throw new \Exception ("Invalid Request");
             }
 
             if ($id = $this->getRequest()->getGet('id')) {
-                $cmsPage = $cmsPage->load($id);
+                $brand = $brand->load($id);
 
-                if (!$cmsPage){
+                if (!$brand){
                     throw new \Exception ("Records not found.");
                 }
             }
             else {
-                $cmsPage->createdDate = date("Y-m-d H:i:s");
+                $brand->createdDate = date("Y-m-d H:i:s");
             }
-            $cmsPageData = $this->getRequest()->getPost('cmsPage'); 
-            $cmsPage->setData($cmsPageData);
-            $cmsPage->save();
+            $brandData = $this->getRequest()->getPost('brand'); 
+            $brand->setData($brandData);
+            $brand->save();
             $this->getMessage()->setSuccess('Record Inserted Successfully.');
         }
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
-            //echo $e->getMessage();
         }
         $this->redirect('grid',null,null,true);
     }
@@ -57,11 +56,11 @@ class CmsPage extends \Controller\Core\Admin {
         try{
             $layout = $this->getLayout(); 
             $content = $layout->getChild('content');
-            $cmsPage = \Mage::getModel('Model\CmsPage');
+            $brand = \Mage::getModel('Model\Brand');
             if ($id = $this->getRequest()->getGet('id')){   
-                $cmsPage = $cmsPage->load($id);
+                $brand = $brand->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\CmsPage\Edit')->setTableRow($cmsPage);
+            $edit =  \Mage::getBlock('Block\Admin\Brand\Edit')->setTableRow($brand);
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }
@@ -77,9 +76,9 @@ class CmsPage extends \Controller\Core\Admin {
             if(!$id){
                 throw new \Exception("Invalid ID.");    
             }
-            $cmsPage = \Mage::getModel('Model\CmsPage');
-            $cmsPage->load($id);
-            if($cmsPage->delete()) {
+            $brand = \Mage::getModel('Model\Brand');
+            $brand->load($id);
+            if($brand->delete()) {
                 $this->getMessage()->setSuccess('Record Deleted Successfully.');
             }
             else {
@@ -93,6 +92,3 @@ class CmsPage extends \Controller\Core\Admin {
         
     }
 }
-
-?>
-

@@ -56,10 +56,13 @@ class Admin extends \Controller\Core\Admin
 
     public function editAction(){
         try{
-            $edit =  \Mage::getBlock('Block\Admin\Admin\Edit');
-            $edit->setController($this);
             $layout = $this->getLayout(); 
             $content = $layout->getChild('content');
+            $admin = \Mage::getModel('Model\Admin');
+             if ($id = $this->getRequest()->getGet('id')){   
+                $admin = $admin->load($id);
+            }
+            $edit =  \Mage::getBlock('Block\Admin\Admin\Edit')->setTableRow($admin);
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }
@@ -76,7 +79,6 @@ class Admin extends \Controller\Core\Admin
                 throw new \Exception("Invalid ID.");    
             }
             $admin = \Mage::getModel('Model\Admin');
-           // $admin = $this->getpayment();
             $admin->load($id);
             if($admin->delete()) {
                 $this->getMessage()->setSuccess('Record Deleted Successfully.');

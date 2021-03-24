@@ -51,19 +51,23 @@ class Product extends \Controller\Core\Admin
         }
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
-            //echo $e->getMessage();
         }
         $this->redirect('grid',null,null,true);
     }
 
     public function editAction(){
         try{
-            $edit =  \Mage::getBlock('Block\Admin\Product\Edit');
-            // $edit->setController($this);
+            
             $layout = $this->getLayout(); 
-
             //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Product\Edit\Tabs'));
             $content = $layout->getChild('content');
+            
+            $product = \Mage::getModel('Model\Product');
+
+            if ($id = (int)$this->getRequest()->getGet('id')){   
+                $product = $product->load($id);
+            }
+            $edit =  \Mage::getBlock('Block\Admin\Product\Edit')->setTableRow($product);
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }
@@ -129,8 +133,10 @@ class Product extends \Controller\Core\Admin
                 $media->setPrimaryKey('mediaId');
                 foreach($ids as $key=>$value){
                     $media->load($key);
+                    $id = $media->mediaId;
+                    $query = "DELETE FROM `product_media` WHERE `mediaId` = $id"; 
                     if(unlink($media->image)){
-                        $media->delete();
+                        $media->delete($query);
                     }
                 }
             }

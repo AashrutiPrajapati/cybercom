@@ -101,12 +101,15 @@ class Customer extends \Controller\Core\Admin {
 
     public function editAction(){
         try{
-            $edit =  \Mage::getBlock('Block\Admin\Customer\Edit');
-           // $edit->setController($this);
             $layout = $this->getLayout(); 
-            $layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Customer\Edit\Tabs'));
-
+            //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Customer\Edit\Tabs'));
             $content = $layout->getChild('content');
+            $customer = \Mage::getModel('Model\Customer');
+            if ($id = $this->getRequest()->getGet('id')){   
+                $customer = $customer->load($id);
+            }
+            $edit =  \Mage::getBlock('Block\Admin\Customer\Edit')->setTableRow($customer);
+
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }

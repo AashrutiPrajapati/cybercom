@@ -64,13 +64,22 @@ class Payment extends \Controller\Core\Admin {
             $this->getMessage()->setFailure($e->getMessage());
             //echo $e->getMessage();
         }
+        // $gridHtml = \Mage::getBlock('Block\Admin\Payment\Grid')->toHtml();
+        // $this->responseHtml($gridHtml);
         $this->gridAction();
         //$this->redirect('grid',null,null,true);
     }
 
     public function editAction(){
         try{
-            $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->toHtml();
+            // $layout = $this->getLayout();
+            // $content = $layout->getChild('content');
+            $payment = \Mage::getModel('Model\Payment');
+            if ($id = $this->getRequest()->getGet('id')){   
+                $payment = $payment->load($id);
+            }   
+
+            $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->setTableRow($payment)->toHtml();
             $this->responseHtml($edit);
             
             // $edit =  \Mage::getBlock('Block\Admin\Payment\Edit');

@@ -63,10 +63,14 @@ class Category extends \Controller\Core\Admin {
     public function editAction()
     {
         try{
-            $edit =  \Mage::getBlock('Block\Admin\Category\Edit');
-            //$edit->setController($this);
             $layout = $this->getLayout(); 
             $content = $layout->getChild('content');
+            $category = \Mage::getModel('Model\Category');
+            if ($id = (int)$this->getRequest()->getGet('id')){   
+                $category = $category->load($id);
+            }
+            $edit =  \Mage::getBlock('Block\Admin\Category\Edit')->setTableRow($category);
+
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }

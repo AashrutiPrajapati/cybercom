@@ -1,9 +1,8 @@
 <?php
-$category = $this->getCategory();
-$categories = $this->getCategories();
+$category = $this->getTableRow();
 $categoryOptions =$this->getCategoryOptions();
 ?>
-
+<form action="<?php echo $this->getUrl('save');?>" method="post">
 <div class="form-group"> 
     <select  name="category[parentId]" >
         <?php if($categoryOptions):?>

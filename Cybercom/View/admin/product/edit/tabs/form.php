@@ -1,5 +1,6 @@
 <?php
-$product = $this->getProduct(); 
+$product = $this->getTableRow(); 
+// print_r($product); die;
 ?>
 
 <div class="container border mt-5" style="padding:10px 90px; width:60%">

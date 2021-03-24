@@ -1,9 +1,9 @@
 <?php
-$product = $this->getProduct();
+$product = $this->getTableRow();
 $customerGroups = $this->getCustomerGroup();
 ?>
 
-<form method="POST" action="<?php echo $this->getUrl("save","Product_GroupPrice") ?>">
+<form method="POST" action="<?php echo $this->getUrl("save","Product\GroupPrice") ?>">
 <button type="submit" class="btn btn-success btn-sm mb-3">Update</button>
     <table class="table table-bordered" style="width:70%">
             <tr class="bg-dark text-white">

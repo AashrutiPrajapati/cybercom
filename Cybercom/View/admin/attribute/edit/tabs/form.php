@@ -1,6 +1,4 @@
-<?php
-$attribute = $this->getAttribute(); 
-?>
+<?php $attribute = $this->getTableRow(); ?>
 
 <div class="container border mt-5" style="padding:10px 90px; width:60%">
 <h3 class="text-center m-5 ">Add/Update Attribute Details</h3>

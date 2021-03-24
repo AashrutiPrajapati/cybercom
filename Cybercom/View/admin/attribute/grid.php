@@ -40,8 +40,7 @@
                 <td><?php echo $val->sortOrder; ?></td>
                 <td><?php echo $val->backendModel; ?></td>
                 <td><a href='<?php echo $this->getUrl('edit', null, ['id' => $val->attributeId]) ?>' class="btn btn-info btn-sm">Edit</a>
-                    <a href='<?php echo $this->getUrl('delete', null, ['id' => $val->attributeId]) ?>' class="btn btn-danger btn-sm">Delete</a>
-                    <a href='<?php echo $this->getUrl('options', null, ['id' => $val->attributeId]) ?>' class="btn btn-danger btn-sm">Options</a></td>
+                    <a href='<?php echo $this->getUrl('delete', null, ['id' => $val->attributeId]) ?>' class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
         <?php } endif; ?>
         </table> 

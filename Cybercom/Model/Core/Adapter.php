@@ -61,8 +61,8 @@ class Adapter {
        // $result = $this->getConnect()->query($query);
         $request = mysqli_query($this->getConnect(),$query) or $this->error($this->getConnect()->errno, $this->getConnect()->error, $query);
         if (!$result) {
-            //return false;
-            echo "Not Inserted";
+            return false;
+            //echo "Not Inserted";
         }
         return $this->getConnect()->insert_id;
     }
@@ -93,6 +93,21 @@ class Adapter {
         return $row;
     }
     
+    public function fetchOne($query)
+    {
+        if (!$this->isConnected()) 
+        {
+        $this->connection();
+        }
+            $result = $this->getConnect()->query($query);
+            $fetchrow = $result->num_rows;
+        if (!$fetchrow) 
+        {
+            return $fetchrow;
+        }
+        return $fetchrow;
+    }
+
     public function fetchAll($query)
     {
         if (!$this->isConnected()) {

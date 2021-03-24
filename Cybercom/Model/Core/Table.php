@@ -171,9 +171,11 @@ class Table
        // return $rowArray;
     }
 
-    public function delete(){
-        $id = $_GET['id'];
-        $query="Delete FROM `{$this->getTableName()}` WHERE  `{$this->getPrimaryKey()}` = '{$id}'";
+    public function delete($query = null){
+        if(!$query){
+            $id = $_GET['id'];
+            $query="Delete FROM `{$this->getTableName()}` WHERE  `{$this->getPrimaryKey()}` = '{$id}'";
+        }
         return $this->getAdapter()->delete($query);  
     }
 

@@ -79,7 +79,6 @@ class Table
     }
 
     public function save($query = null) {
-
         if(!$query){
             if(!array_key_exists($this->getPrimaryKey(),$this->getData())){
                 $keys = "`" . implode("`,`",array_keys($this->data)) . "`";

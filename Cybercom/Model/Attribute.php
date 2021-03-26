@@ -26,7 +26,7 @@ class Attribute extends Core\Table
             'text'=>'Text Box',
             'textarea'=>'Text Area',
             'select'=>'Select',
-            'chechbox'=>'Checkbox',
+            'checkbox'=>'Checkbox',
             'radio'=>'Radio'
         ];
     }

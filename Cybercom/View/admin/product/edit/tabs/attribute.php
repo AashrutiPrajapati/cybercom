@@ -13,9 +13,11 @@
         <?php foreach($attributes->getData() as $attribute): ?>
         <?php
             $displayBlock = \Mage::getBlock('Block\Admin\Attribute\Display');
-            $displayBlock =$displayBlock->setAttribute($attribute)->setProduct($product);
+            $displayBlock->setAttribute($attribute)->setProduct($product);
+            // echo "<pre>";
+            // print_r($displayBlock);
             echo $displayBlock->toHtml();
-        ?>
+        ?> 
         <?php endforeach; ?>
     <?php else: ?>
     <div  class="ml-5">

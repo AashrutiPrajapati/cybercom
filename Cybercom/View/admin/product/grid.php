@@ -1,4 +1,4 @@
-<?php $data = $this->getProducts(); ?>  
+<?php /* $data = $this->getProducts(); ?>  
 
 <h3 class="text-center mt-5">Product Records</h3>
 <div class="container-fluid" style="margin-left:5% ;margin-bottom:20px"><a href="<?php echo $this->getUrl('edit');?>" class="btn btn-success font-weight-bold"><i class="fa fa-sm fa-plus"></i> Add Product</a></div>
@@ -46,6 +46,7 @@
     </table>    
 </div>
 </div>
+*/?>
 
 
 

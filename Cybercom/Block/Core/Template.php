@@ -28,7 +28,7 @@ class Template
 
     public function toHtml(){
         ob_start();
-        require_once $this->getTemplate();
+        require $this->getTemplate();
         $content = ob_get_contents();
         ob_end_clean();
         return $content;

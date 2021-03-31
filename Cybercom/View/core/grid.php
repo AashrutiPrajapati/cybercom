@@ -5,13 +5,16 @@
     $columns = $this->getColumns();
 ?>
 
+<form method = "POST" action = "<?php echo $this->getUrl('filter'); ?>">
 <h3 class="text-center mt-5"><?= $this->getTitle() ?></h3>
     <div id="container-fluid" style="margin-left:5% ;margin-bottom:20px">
         <?php if($buttons): ?>
             <?php foreach ($buttons as $key => $button): ?>
                 <a class="btn btn-primary" href="<?php echo $this->getButtonUrl($button['method']); ?>"><?= $button['label']?></a>
-            <?php endforeach; ?><br><br>
+            <?php endforeach; ?>
         <?php endif; ?>
+
+            <input type="submit" value="Apply Filter" class="btn btn-primary m-3" >
 
             <table class="table table-bordered" style="width:95%">
                 <thead>
@@ -63,7 +66,8 @@
 
                 </tbody>
             </table>
-
-        </div>
+        <?php \Mage::getModel('Model\Admin\Filter')->clearFilters(); ?>
+    </div>
+</form>
     
 

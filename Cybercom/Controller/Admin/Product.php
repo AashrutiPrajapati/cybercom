@@ -171,6 +171,15 @@ class Product extends \Controller\Core\Admin
             $this->redirect('grid','product');
         }
     }
+
+    public function filterAction()
+    {
+        $filters = $this->getRequest()->getPost('filter');
+        $filterModel = \Mage::getModel('Model\Admin\Filter');
+        $filterModel->setFilters($filters);
+        //$filterValues = $filterModel->getFilterValue('text','email');
+        $this->redirect('grid');
+    }
     
 }
 

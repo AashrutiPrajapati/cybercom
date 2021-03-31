@@ -93,4 +93,11 @@ class Cart extends \Controller\Core\Admin
         }
         $this->redirect('index');
     }
+
+    public function selectCustomerAction()
+    {
+        $customerId = $this->getRequest()->getPost('customer');
+        //print_r($customerId);
+
+    }
 }

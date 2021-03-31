@@ -47,22 +47,23 @@ class Attribute extends \Controller\Core\Admin
             $productData = $this->getRequest()->getPost('product');
             
             foreach ($productData as $key => $value) {
-                if (gettype($value) != 'array') {
-                    $product->$key = $value;
+                $product->key = $value;
+                // if (gettype($value) != 'array') {
+                //     $product->$key = $value;
+                // }
+                // else{
+                //     $value = implode(',', $value);
+                //     $product->$key = $value;
                 }
-                else{
-                    $value = implode(',', $value);
-                    $product->$key = $value;
-                }
-            }
+                $product->save();
+            
             if(!$product->save()){
                 throw new \Exception("Error Processing Data.");
             }
             $this->getMessage()->setSuccess('Data Stored Successfully !!');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }
-        $this->gridAction();
+        $this->redirect('grid');
     }
 }

@@ -48,6 +48,11 @@ class Attribute extends \Controller\Core\Admin
             
             $attributeData = $this->getRequest()->getPost('attribute'); 
             $attribute->setData($attributeData);
+
+            $table = $attribute->entityTypeId;
+            $adapter = \Mage::getModel('model\Attribute')->getAdapter();
+            echo $query = "ALTER TABLE `{$table}` ADD `{$attribute->code}` $attribute->backendType(20);";
+            $adapter->update($query);
             $attribute->save();
             $this->getMessage()->setSuccess('Record Inserted Successfully.');
         }

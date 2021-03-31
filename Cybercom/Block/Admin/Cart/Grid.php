@@ -23,4 +23,9 @@ class Grid extends \Block\Core\Template
         }
         return $this->cart;
     }
+
+    public function getCustomers()
+    {
+        return \Mage::getModel('Model\Customer')->fetchAll();   
+    }
 }

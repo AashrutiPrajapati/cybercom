@@ -4,10 +4,11 @@ namespace Model\Core;
 
 class Table 
 {
+    protected $originalData = [];
+    protected $data = [];
     protected $adapter = null;
     protected $primaryKey = null;
     protected $tableName = null;
-    protected $data = [];
 
     public function setAdapter(\Model\Core\Adapter $adapter = null)
     {
@@ -62,6 +63,17 @@ class Table
         return $this->data;
     }
 
+    public function setOriginalData($originalData)
+    {
+        $this->originalData = $originalData;
+        return $this;
+    }
+
+    public function getOriginalData()
+    {
+        return $this->originalData;
+    }
+
     public function __set($key,$value)
     {
         $this->data[$key] = $value;
@@ -72,6 +84,13 @@ class Table
     public function __get($key)
     {
         //return $key;
+        // if(array_key_exists($key,$this->data)){
+        //     return $this->data[$key];
+        // }
+        // if(array_key_exists($key,$this->originalData)){
+        //     return $this->originalData[$key];
+        // }
+        // return null;
         if(!array_key_exists($key,$this->data)){
             return NULL;
         }
@@ -80,6 +99,14 @@ class Table
 
     public function save($query = null) {
         if(!$query){
+
+            // if (!array_key_exists($this->getPrimaryKey(), $this->data)) {
+            //     unset($this->data[$this->getPrimaryKey()]);
+            // }
+            // if(!$this->data) {
+            //     return false;
+            // }
+
             if(!array_key_exists($this->getPrimaryKey(),$this->getData())){
                 $keys = "`" . implode("`,`",array_keys($this->data)) . "`";
                 $values = "'" . implode("','",$this->data) . "'";
@@ -135,15 +162,21 @@ class Table
         
     }
 
-    public function fetchRow($query){
-       
+    public function fetchRow($query)
+    {
         $row = $this->getAdapter()->fetchRow($query);
-        
-            if(!$row){
-                
-                return false;
-            }
-            $this->data = $row;
+        if(!$row){    
+            return false;
+        }
+        $this->data = $row;
+        //$this->setOriginalData($row);
+        //$this->resetData();
+        return $this;
+    }
+
+    public function resetData()
+    {
+        $this->data = [];
         return $this;
     }
 
@@ -160,6 +193,7 @@ class Table
         foreach ($rows as $key => $value) {
             $rows = new $this();
             $rows->setData($value);
+            //$rows->setOriginalData($value);
             $rowArray[] = $rows;
         }
         $collectionClassName = get_class($this).'\Collection';

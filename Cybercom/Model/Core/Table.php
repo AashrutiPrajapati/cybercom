@@ -84,47 +84,50 @@ class Table
     public function __get($key)
     {
         //return $key;
-        // if(array_key_exists($key,$this->data)){
-        //     return $this->data[$key];
-        // }
-        // if(array_key_exists($key,$this->originalData)){
-        //     return $this->originalData[$key];
-        // }
-        // return null;
-        if(!array_key_exists($key,$this->data)){
-            return NULL;
+        if(array_key_exists($key,$this->data)){
+            return $this->data[$key];
         }
-        return $this->data[$key];
+        if(array_key_exists($key,$this->originalData)){
+            return $this->originalData[$key];
+        }
+        return null;
+        // if(!array_key_exists($key,$this->data)){
+        //     return NULL;
+        // }
+        // return $this->data[$key];
     }
 
     public function save($query = null) {
         if(!$query){
+            if (!array_key_exists($this->getPrimaryKey(), $this->data)) {
+                unset($this->data[$this->getPrimaryKey()]);
+            }
 
-            // if (!array_key_exists($this->getPrimaryKey(), $this->data)) {
-            //     unset($this->data[$this->getPrimaryKey()]);
-            // }
-            // if(!$this->data) {
-            //     return false;
-            // }
+            $id = (int)$this->{$this->getPrimaryKey()};
+            
+            if(!$this->data) {
+                return false;
+            }
 
-            if(!array_key_exists($this->getPrimaryKey(),$this->getData())){
+            if(!$id){
                 $keys = "`" . implode("`,`",array_keys($this->data)) . "`";
                 $values = "'" . implode("','",$this->data) . "'";
                 $query = "INSERT INTO `". $this->getTableName() ."` (". $keys . ") VALUES (". $values . ")";
-                //die();
-                return $this->getAdapter()->insert($query);  
+                return $this->getAdapter()->insert($query);
             }
-            
-            $args = [];
-            foreach ($this->getData() as $key => $value) {
-                $args[] = "`$key` = '$value'";
-            }
-            $id = $this->getData()[$this->getPrimaryKey()];
-            array_shift($args);
-            $query = "UPDATE `{$this->getTableName()}`  SET ".implode(",",$args) . " WHERE  `{$this->getPrimaryKey()}` = '{$id}'";
+            else {
+                $args = [];
 
+                foreach ($this->getData() as $key => $value) {
+                    $args[] = "`$key` = '$value'";
+                }
+                //$id = $this->getData()[$this->getPrimaryKey()];
+                //array_shift($args);
+                $query = "UPDATE `{$this->getTableName()}`  SET ".implode(",",$args) . " WHERE  `{$this->getPrimaryKey()}` = '{$id}'"; 
+                return $this->getAdapter()->update($query);
+            }
+            return $this->load($id);      
         }
-        return $this->getAdapter()->update($query);
     }
 
     public function addressSave()
@@ -150,7 +153,7 @@ class Table
         }
 
         if(count(array_keys($arr,$data[$this->getPrimaryKey()])) != 2 || !$arr){
-            echo $query = "INSERT INTO `{$this->getTableName()}` (".implode(",", array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')"; 
+            $query = "INSERT INTO `{$this->getTableName()}` (".implode(",", array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')"; 
         }
         return $this->getAdapter()->insert($query);
     }
@@ -168,9 +171,9 @@ class Table
         if(!$row){    
             return false;
         }
-        $this->data = $row;
-        //$this->setOriginalData($row);
-        //$this->resetData();
+        //$this->data = $row;
+        $this->setOriginalData($row);
+        $this->resetData();
         return $this;
     }
 
@@ -192,8 +195,8 @@ class Table
         }
         foreach ($rows as $key => $value) {
             $rows = new $this();
-            $rows->setData($value);
-            //$rows->setOriginalData($value);
+            //$rows->setData($value);
+            $rows->setOriginalData($value);
             $rowArray[] = $rows;
         }
         $collectionClassName = get_class($this).'\Collection';

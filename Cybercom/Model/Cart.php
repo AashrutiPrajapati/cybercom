@@ -32,24 +32,30 @@ class Cart extends \Model\Core\Table
             return false;
         }
         $customer = \Mage::getModel('Model\Customer')->load($this->customerId);
+        if(!$customer){
+            return false;
+        }
         $this->setCustomer($customer);
         return $this->customer;
     }
 
-    public function setItems(\Model\Cart\Item\Collection $items)
+    public function setItems(\Model\Cart\Item\Collection $items=null)
     {
         $this->items = $items;
         return $this;
     }
 
     public function getItems()
-    {        
+    {   
+
         if(!$this->cartId) {
             return false;
         }
-
         $query = "SELECT * FROM `cart_item` WHERE `cartId` = '{$this->cartId}';";
         $items = \Mage::getModel('Model\Cart\Item')->fetchAll($query);
+        if(!$items){
+           return false; 
+        }
         $this->setItems($items);
         return $this->items;
     }
@@ -65,9 +71,12 @@ class Cart extends \Model\Core\Table
         if(!$this->cartId){
             return false;
         }
-
-        $query = "SELECT * FROM `cart_address` WHERE cartId = '{$this->cartId}' AND addressType = '{\Model\Cart\Address::ADDRESS_TYPE_BILLING}';";
+        $address = \Model\Cart\Address::ADDRESS_TYPE_BILLING;
+        $query = "SELECT * FROM `cart_address` WHERE cartId = '{$this->cartId}' AND `addressType` = '{$address}';";
         $billingAddress = \Mage::getModel('Model\Cart\Address')->fetchRow($query);
+        if(!$billingAddress){
+            return false;
+        }
         $this->setBillingAddress($billingAddress);
         return $this->billingAddress;
     }
@@ -83,9 +92,12 @@ class Cart extends \Model\Core\Table
         if(!$this->cartId){
             return false;
         }
-
-        $query = "SELECT * FROM `cart_address` WHERE cartId = '{$this->cartId}' AND addressType = '{\Model\Cart\Address::ADDRESS_TYPE_SHIPPING}';";
+        $address = \Model\Cart\Address::ADDRESS_TYPE_SHIPPING;
+        $query = "SELECT * FROM `cart_address` WHERE cartId = '{$this->cartId}' AND addressType = '{$address}';";
         $shippingAddress = \Mage::getModel('Model\Cart\Address')->fetchRow($query);
+        if(!$shippingAddress){
+            return false;
+        }
         $this->setShippingAddress($shippingAddress);
         return $this->shippingAddress;
     }
@@ -103,6 +115,7 @@ class Cart extends \Model\Core\Table
         }
         $query = "SELECT * FROM `cart` WHERE `shippingId` = '{$this->shippingId}'";
         $shipping = \Mage::getModel('Model\Shipping')->fetchRow($query);
+
         $this->setShipping($shipping);
         return $this->shipping; 
     }
@@ -125,7 +138,7 @@ class Cart extends \Model\Core\Table
     }
 
     public function addItemToCart($product, $quantity = 1, $addModel = false)
-    {
+    { 
         $query = "SELECT * FROM `cart_item` WHERE `cartId` = '{$this->cartId}' AND `productId` = '{$product->productId}'";
         $cartItem = \Mage::getModel('Model\Cart\Item');
         $cartItem = $cartItem->fetchRow($query);
@@ -143,6 +156,5 @@ class Cart extends \Model\Core\Table
         $cartItem->discount = $product->discount;
         $cartItem->save();
         return true;      
-
     }
 }

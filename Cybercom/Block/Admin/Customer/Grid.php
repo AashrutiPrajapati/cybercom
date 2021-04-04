@@ -13,7 +13,7 @@ class Grid extends \Block\Core\Template
 
     // public function setCustomers($customers = NULL) {
     //     if(!$customers) {
-    //         $customers = \Mage::getModel('Model_Customer');
+    //         $customers = \Mage::getModel('Model\Customer');
     //         $customers = $customers->fetchAll()->getData();
     //     }
     //     $this->customers = $customers;
@@ -23,11 +23,11 @@ class Grid extends \Block\Core\Template
     public function setCustomers($customers = null){
         if(!$customers){
             $customers = \Mage::getModel('Model\Customer');
-            $query = "SELECT c.`customerId`, c.`groupId`, c.`firstName`, c.`lastName`, c.`email`, c.`password`, c.`status`, c.`createdDate`, c.`updatedDate`,a.`address`, a.`city`, a.`state`, a.`zipCode`, a.`country`,a.`addressType`
+            $query = "SELECT c.`customerId`, c.`groupId`, c.`firstName`, c.`lastName`, c.`email`,c.`mobile`, c.`password`, c.`status`, c.`createdDate`, c.`updatedDate`,a.`address`, a.`city`, a.`state`, a.`zipCode`, a.`country`,a.`addressType`
                       FROM `customer` AS c 
                       LEFT JOIN `customer_address` a 
                       ON c.`customerId` = a.`customerId`";
-            $customers =  $customers->fetchAll($query)->getData();
+            $customers =  $customers->fetchAll($query);
         }
         $this->customers =$customers;
         return $this;

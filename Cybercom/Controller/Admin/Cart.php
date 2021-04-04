@@ -23,21 +23,27 @@ class Cart extends \Controller\Core\Admin
             $this->getMessage()->setFailure($e->getMessage());
         }
         $this->redirect('index');
-
     }
 
-    protected function getCart()
+    protected function getCart($customerId = null)
     {
-        $sessionId = \Mage::getModel('Model\Admin\Session')->getId();
+        $session = \Mage::getModel('Model\Admin\Session');
+        if($customerId) {
+            $session->customerId = $customerId;
+        }
+        //$sessionId = \Mage::getModel('Model\Admin\Session')->getId();
         $cart = \Mage::getModel('Model\Cart');
-        $query = "SELECT * FROM `{$cart->getTableName()}` WHERE `sessionId` = '{$sessionId}' ";
+        //$query = "SELECT * FROM `{$cart->getTableName()}` WHERE `sessionId` = '{$sessionId}' ";
+        $query = "SELECT * FROM `{$cart->getTableName()}` WHERE `customerId` = '{$session->customerId}' ";
         $cart = $cart->fetchRow($query);
         
         if($cart){
             return $cart; 
         }
         $cart = \Mage::getModel('Model\Cart');
-        $cart->sessionId = $sessionId;
+        //$cart->sessionId = $sessionId;
+        $cart->customerId = $session->customerId;
+        //print_r($cart->customerId); die;
         $cart->createdDate = date("Y-m-d H:i:s");
         $cart->save();
         return $cart;
@@ -97,7 +103,107 @@ class Cart extends \Controller\Core\Admin
     public function selectCustomerAction()
     {
         $customerId = $this->getRequest()->getPost('customer');
-        //print_r($customerId);
+        $this->getCart($customerId);
+        //print_r($customerId);die;
 
+        $this->redirect('index', 'Admin\Cart',null,true);
     }
+
+    public function saveBillingAddressAction()
+    {
+        $billing = $this->getRequest()->getPost('billing');
+        $cartAddress = \Mage::getModel('Model\Cart\Address');
+
+        if ($this->getCart()->getBillingAddress()) {
+            $id = $this->getCart()->getBillingAddress()->cartAddressId;
+
+            $cartAddress->load($id);
+        }
+        $cartAddress->setData($billing);
+        $cartAddress->addressType = 'billing';
+        $cartAddress->cartId = $this->getCart()->cartId;
+        $cartAddress->save();
+        // echo "<pre>";
+        // print_r($cartAddress->save()); die;
+
+        if($this->getRequest()->getPost('saveBillingInAddressBook')) {
+            $customerBillingAddress = $this->getCart()->getBillingAddress();
+            if ($customerBillingAddress) {
+                $customerBillingAddress->setData($billing);
+            } 
+            else {
+                $customerBillingAddress = \Mage::getModel('Model\Customer\Address');
+                $customerBillingAddress->setData($billing);
+                $customerBillingAddress->customerId = $this->getCart()->getCustomer()->customerId;
+                $customerBillingAddress->addressType = 'billing';
+            }
+            $customerBillingAddress->save();
+        }
+        $this->getMessage()->setSuccess('Billing Address Saved');
+        $this->redirect('index','Admin\Cart',null,true);
+    }
+
+    public function saveShippingAddressAction()
+    {
+        $flag = $this->getRequest()->getPost('sameAsBilling');
+        if ($flag) {
+            $billing = $this->getRequest()->getPost('billing');
+            $cartAddress = \Mage::getModel('Model\cart\Address');
+            if ($this->getCart()->getShippingAddress()) {
+                $id = $this->getCart()->getShippingAddress()->cartAddressId;
+                $cartAddress->load($id);
+            }
+            $cartAddress->setData($billing);
+            $cartAddress->addressType = 'shipping';
+            $cartAddress->cartId = $this->getCart()->cartId;
+            $cartAddress->save();
+
+            if ($this->getRequest()->getPost('saveShippingInAddressBook')) {
+                $customerShippingAddress = $this->getCart()->getShippingAddress();
+                if ($customerShippingAddress) {
+                    $customerShippingAddress->setData($billing);
+                    $customerShippingAddress->save();
+                } 
+                else {
+                    $customerShippingAddress = \Mage::getModel('Model\Customer\Address');
+                    $customerShippingAddress->setData($billing);
+                    $customerShippingAddress->customerId = $this->getCart()->getCustomer()->customerId;
+                    $customerShippingAddress->addressType = 'shipping';
+                    $customerShippingAddress->save();
+                }
+            }
+        } else {
+            $shipping = $this->getRequest()->getPost('shipping');
+            
+            $cartAddress = \Mage::getModel('Model\Cart\Address');
+            if ($this->getCart()->getShippingAddress()) {
+                $id = $this->getCart()->getShippingAddress()->cartAddressId;
+                $cartAddress->load($id);
+            }
+            $cartAddress->setData($shipping);
+            $cartAddress->addressType = 'shipping';
+            $cartAddress->cartId = $this->getCart()->cartId;
+            $cartAddress->save();
+            // echo "<pre>";
+            // print_r($cartAddress); die;
+
+            if ($this->getRequest()->getPost('saveShippingInAddressBook')) {
+                $customerShippingAddress = $this->getCart()->getShippingAddress();
+                if ($customerShippingAddress) {
+                    $customerShippingAddress->setData($shipping);
+                    $customerShippingAddress->save();
+                } 
+                else {
+                    $customerShippingAddress = \Mage::getModel('Model\Customer\Address');
+                    $customerShippingAddress->setData($shipping);
+                    $customerShippingAddress->customerId = $this->getCart()->getCustomer()->customerId;
+                    $customerShippingAddress->addressType = 'shipping';
+                    $customerShippingAddress->save();
+                }
+            }
+        }
+        $this->getMessage()->setSuccess('Shipping Address Saved');
+        $this->redirect('index','Admin\Cart',null,true);
+    }
+
 }

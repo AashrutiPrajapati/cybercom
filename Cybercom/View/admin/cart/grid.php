@@ -4,6 +4,8 @@
     $customers = $this->getCustomers();
     $customerBillingAddress = $this->getCustomerBillingAddress();
     $customerShippingAddress = $this->getCustomerShippingAddress();
+    $payment = $this->getPayment();
+    $shipping = $this->getShipping();
     // echo "<pre>";
     // print_r($customerShippingAddress); die;
 
@@ -51,7 +53,9 @@
                         <td><?php echo $item->cartItemId; ?></td>
                         <td><?php echo $item->productId; ?></td>
                         <td><input type="number" name = "quantity[<?php echo $item->cartItemId?>]" value = "<?php echo $item->quantity; ?>"></td>
-                        <td><?php echo $item->price; ?></td>
+                        <td><input type="number" name = "price[<?php echo $item->cartItemId?>]" value = "<?php echo $item->price; ?>"></td>
+                        
+                        <!-- <td><?php //echo $item->price; ?></td> -->
                         <td><?php echo $item->price * $item->quantity; ?></td>
                         <td><?php echo $item->discount * $item->quantity; ?></td>
                         <td><?php echo ($item->quantity * $item->price) - ($item->discount * $item->quantity)?></td>
@@ -140,14 +144,13 @@
                     <td class="font-weight-bold">Payment Method</td>
                 </tr>
                 <tr>
-                    <td>Credit Card <input type="radio" value="credit cart"><br>
-                        Debit Card <input type="radio" value="debit cart"><br>
-                        PayPal <input type="radio" value="paypal"><br>
-                        COD <input type="radio" value="cod">
+                    <td><?php foreach ($payment->getData() as $key => $value) { ?>
+                        <?php echo $value->name;?><input name= "paymentId" type="radio" value="<?php echo $value->paymentId; ?>" <?php if($payment->paymentId == $cart->paymentId) {echo "selected";}?>><br>
+                    <?php }?>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Save" class="btn btn-success font-weight-bold" style="padding:5px 20px"></td>
+                    <td><input type="submit" value="Save" onclick="savePayment();" class="btn btn-success font-weight-bold" style="padding:5px 20px"></td>
                 </tr>
             </table>
         </div>
@@ -157,13 +160,13 @@
                     <td class="font-weight-bold">Shipping Method</td>
                 </tr>
                 <tr>
-                    <td>Express Delivery(1 Day) <input type="radio"><br>
-                        Paltinum Delivery(3 Days) <input type="radio"><br>
-                        Regular Delivery(7 Days) <input type="radio">
+                    <td><?php foreach ($shipping->getData() as $key => $value) { ?>
+                            <?php echo $value->name;?><input name= "shippingId" type="radio"  value="<?php echo $value->shippingId; ?>"><br>
+                        <?php }?>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Save" class="btn btn-success font-weight-bold" style="padding:5px 20px"></td>
+                    <td><input type="submit" value="Save" onclick="saveShipping();" class="btn btn-success font-weight-bold" style="padding:5px 20px"></td>
                 </tr>
             </table>
         </div>
@@ -171,8 +174,7 @@
             <table class="table table-bordered">
                 <tr>
                     <td>Base Total : <br>
-                        Shipping Charges : <br>
-                        Coupon : 
+                        Shipping Charges : <br> 
                     </td>
                 </tr>
                 <tr>
@@ -200,7 +202,18 @@
     function saveShippingAddress(){
         var form = document.getElementById('cartForm');
         form.setAttribute('Action', '<?php echo $this->getUrl('saveShippingAddress'); ?>');
-        form.submit();
-        
+        form.submit();   
+    }
+
+    function savePayment(){
+        var form = document.getElementById('cartForm');
+        form.setAttribute('Action', '<?php echo $this->getUrl('savePayment'); ?>');
+        form.submit();   
+    }
+
+    function saveShipping(){
+        var form = document.getElementById('cartForm');
+        form.setAttribute('Action', '<?php echo $this->getUrl('saveShipping'); ?>');
+        form.submit();   
     }
 </script>

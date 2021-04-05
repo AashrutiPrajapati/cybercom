@@ -8,6 +8,7 @@ class Cart extends \Controller\Core\Admin
     {
         try {
             $productId = $this->getRequest()->getGet('id');
+
             $product = \Mage::getModel('Model\Product')->load($productId);
             
             if(!$product) {
@@ -15,7 +16,8 @@ class Cart extends \Controller\Core\Admin
             }
             $cart = $this->getCart();
             $cart->addItemToCart($product, 1, true);
-
+            $cart->total();
+            //die;
             $this->getMessage()->setSuccess('Item Successfully added into cart');
 
 
@@ -65,11 +67,17 @@ class Cart extends \Controller\Core\Admin
     {
         try {
             $quantities = $this->getRequest()->getPost('quantity');
+            $prices = $this->getRequest()->getPost('price');
+            // echo "<pre>";
+            // print_r($quantities);
+            // print_r($prices); die;
+
             $cart = $this->getCart();
         
             foreach ($quantities as $cartItemId => $quantity) {
                 $cartItem = \Mage::getModel('Model\Cart\Item')->load($cartItemId);
                 $cartItem->quantity = $quantity;
+                $cartItem->price = $prices[$cartItemId];
                 $cartItem->save();
             }
             $this->getMessage()->setSuccess('Items updated');
@@ -206,4 +214,24 @@ class Cart extends \Controller\Core\Admin
         $this->redirect('index','Admin\Cart',null,true);
     }
 
+    public function savePaymentAction()
+    {
+        $paymentId = $this->getRequest()->getPost('paymentId');
+        $cart = $this->getCart();
+        $payment = \Mage::getModel("Model\Payment")->load($paymentId);
+        $cart->paymentId = $payment->paymentId;
+        $cart->save();
+        $this->redirect('index','Admin\Cart',null,true);   
+    }
+
+    public function saveShippingAction()
+    {
+        $shippingId = $this->getRequest()->getPost('shippingId');
+        $cart = $this->getCart();
+        $shipping = \Mage::getModel("Model\Shipping")->load($shippingId);
+        $cart->shippingId = $shipping->shippingId;
+        $cart->save();
+        $this->redirect('index','Admin\Cart',null,true);   
+    }
 }
+

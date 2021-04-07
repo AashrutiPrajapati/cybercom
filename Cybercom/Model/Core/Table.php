@@ -103,16 +103,16 @@ class Table
                 unset($this->data[$this->getPrimaryKey()]);
             }
 
-            $id = (int)$this->{$this->getPrimaryKey()};
+            //$id = (int)$this->{$this->getPrimaryKey()};
             
             if(!$this->data) {
                 return false;
             }
 
-            if(!$id){
+            if(!array_key_exists($this->getPrimaryKey(),$this->getOriginalData())){
                 $keys = "`" . implode("`,`",array_keys($this->data)) . "`";
                 $values = "'" . implode("','",$this->data) . "'";
-                $query = "INSERT INTO `". $this->getTableName() ."` (". $keys . ") VALUES (". $values . ")";
+                $query = "INSERT INTO `". $this->getTableName() ."` (". $keys . ") VALUES (". $values . ")"; 
                 return $this->getAdapter()->insert($query);
             }
             else {
@@ -121,13 +121,16 @@ class Table
                 foreach ($this->getData() as $key => $value) {
                     $args[] = "`$key` = '$value'";
                 }
-                //$id = $this->getData()[$this->getPrimaryKey()];
+                $id = $this->originalData[$this->getPrimaryKey()];
                 //array_shift($args);
                 $query = "UPDATE `{$this->getTableName()}`  SET ".implode(",",$args) . " WHERE  `{$this->getPrimaryKey()}` = '{$id}'"; 
                 return $this->getAdapter()->update($query);
             }
+            
             return $this->load($id);      
         }
+        return $this->getAdapter()->update($query);
+
     }
 
     public function addressSave()

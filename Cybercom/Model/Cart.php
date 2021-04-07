@@ -131,7 +131,7 @@ class Cart extends \Model\Core\Table
         if (!$this->cartId) {
             return false;
         }
-        $query = "SELECT * FROM `cart` WHERE `paymentId` = '{$this->paymentId}'";
+        $query = "SELECT * FROM `payment` WHERE `paymentId` = '{$this->paymentId}'";
         $payment = \Mage::getModel('Model\Payment')->fetchRow($query);
         $this->setPayment($payment);
         return $this->payment; 
@@ -151,10 +151,23 @@ class Cart extends \Model\Core\Table
         $cartItem = \Mage::getModel('Model\Cart\Item');  
         $cartItem->cartId = $this->cartId;
         $cartItem->productId = $product->productId;
+        //$cartItem->price = $product->price;
         $cartItem->price = $product->price;
+        $cartItem->basePrice = $product->price;
+
         $cartItem->quantity = $quantity;
         $cartItem->discount = $product->discount;
         $cartItem->save();
         return true;      
     }
+
+    // public function total()
+    // {
+    //     $items = $this->getItems();
+    //     echo "<pre>";
+    //     print_r($items); die;
+    //     foreach ($items as $key => $value) {
+    //         # code...
+    //     }
+    // }
 }

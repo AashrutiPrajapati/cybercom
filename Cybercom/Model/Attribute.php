@@ -1,6 +1,5 @@
 <?php
 namespace Model;
-\Mage::loadFileByClassName('Model\Core\Table');
 
 class Attribute extends Core\Table
 {

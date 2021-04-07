@@ -5,14 +5,16 @@ namespace Controller\Admin\Attribute;
 class Option extends \Controller\Core\Admin
 {
     public function updateAction()
-    {
+    { 
         $attribute = \Mage::getModel('Model\Attribute');
         $attributeId = $this->getRequest()->getGet('id');
-        
         $query =  "SELECT `optionId` FROM `attribute_option` WHERE `attributeId`={$attributeId}";
-        
-        foreach($attribute->fetchAll($query) as $key=>$value){
-            $ids[] = $value->optionId;
+        $array = $attribute->fetchAll($query);
+        //print_r($array); die;
+        if($array){
+            foreach($array->getData() as $key=>$value){
+                $ids[] = $value->optionId;
+            }
         }
 
         if($exist = $this->getRequest()->getPost('exist')){
@@ -21,7 +23,6 @@ class Option extends \Controller\Core\Admin
                 $query = "UPDATE `attribute_option` 
                 SET `name`='{$value['name']}',`attributeId`={$attributeId},`sortOrder`={$value['sortOrder']} 
                 WHERE `optionId` = {$key}";
-                
                 $attribute->save($query);
             }
         }
@@ -42,7 +43,7 @@ class Option extends \Controller\Core\Admin
                 $attribute->save($query);
             }
         }
-        $this->redirect('edit','attribute');
+        $this->redirect('edit','admin\attribute');
     }
 }
 ?>

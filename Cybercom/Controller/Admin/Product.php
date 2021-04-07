@@ -1,7 +1,5 @@
 <?php
 namespace Controller\Admin;
-\Mage::loadFileByClassName('Controller\Core\Admin');
-
 
 class Product extends \Controller\Core\Admin 
 {
@@ -104,6 +102,8 @@ class Product extends \Controller\Core\Admin
         $media = \Mage::getModel("Model\Product");
         $media->setTableName('product_media');
         $Pid = $media->getPrimaryKey();
+        //print_r($Pid);
+        //die;
         $id = $this->getRequest()->getGet('id');
         
         if($this->getRequest()->getPost('image')){
@@ -114,14 +114,15 @@ class Product extends \Controller\Core\Admin
             $location = 'Skin/image/';
 
             if (move_uploaded_file($tmp_name,$location.$name)){
+
                 $media->image = $location.$name;
                 $media->label = $name;
                 $media->$Pid = $id;
                 $data = $media->getData();
                 $query = "INSERT INTO `{$media->getTableName()}` (".implode(",", array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')"; 
-                // echo "<pre>";
-                // print_r($query); die();
                 $media->save($query);
+                // echo "<pre>";
+                // print_r($a); die;
                 
                 header("location:".$this->getUrl('edit'));
             }
@@ -129,13 +130,14 @@ class Product extends \Controller\Core\Admin
         
         if($this->getRequest()->getPost('remove')){
             $ids = $this->getRequest()->getPost('delete');
+
             if($ids){
                 $media->setPrimaryKey('mediaId');
                 foreach($ids as $key=>$value){
                     $media->load($key);
                     $id = $media->mediaId;
-                    $query = "DELETE FROM `product_media` WHERE `mediaId` = $id"; 
                     if(unlink($media->image)){
+                        $query = "DELETE FROM `product_media` WHERE `mediaId` = $id"; 
                         $media->delete($query);
                     }
                 }
@@ -168,7 +170,7 @@ class Product extends \Controller\Core\Admin
                 $query .= " WHERE `mediaId` = {$key}";
                 $media->save($query);
             }
-            $this->redirect('grid','product');
+            $this->redirect('grid','admin\product');
         }
     }
 

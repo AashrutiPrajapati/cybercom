@@ -1,31 +1,30 @@
-<?php
-namespace Controller\Admin;
-\Mage::loadFileByClassName('Controller\Core\Admin');
+<?php 
+namespace Controller\Admin\Config;
 
-class Attribute extends \Controller\Core\Admin
+class Group extends \Controller\Core\Admin  
 {
     public function gridAction()
     {
-        $grid = \Mage::getBlock('Block\Admin\Attribute\Grid');
         $layout = $this->getLayout();
         $layout->setTemplate('./View/core/layout/oneColumn.php');
+        $grid = \Mage::getBlock('Block\Admin\Config\Grid');
         $content = $layout->getChild('content');
         $content->addChild($grid);
         echo $this->toHtmlLayout();
+
     }
 
     public function editAction()
     {
         try{
             $layout = $this->getLayout(); 
-            //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Attribute\Edit\Tabs'));
             $content = $layout->getChild('content');
-            $attribute = \Mage::getModel('Model\Attribute');
+            $configGroup = \Mage::getModel('Model\Config\Group');
 
             if ($id = $this->getRequest()->getGet('id')){   
-                $attribute = $attribute->load($id);
+                $configGroup = $configGroup->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Attribute\Edit')->setTableRow($attribute);
+            $edit =  \Mage::getBlock('Block\Admin\Config\Edit')->setTableRow($configGroup);
             $content->addChild($edit);
             echo $this->toHtmlLayout();
         }
@@ -34,26 +33,28 @@ class Attribute extends \Controller\Core\Admin
         }
     }
 
-    public function saveAction() {
+    public function saveAction() 
+    {
         try{
-            $attribute = \Mage::getModel('Model\Attribute');
+            $configGroup = \Mage::getModel('Model\Config\Group');
 
             if(!$this->getRequest()->isPost()){
                 throw new \Exception ("Invalid Request");
             }
 
             if ($id = $this->getRequest()->getGet('id')) {
-                $attribute = $attribute->load($id);
-            }
-            
-            $attributeData = $this->getRequest()->getPost('attribute'); 
-            $attribute->setData($attributeData);
+                $configGroup = $configGroup->load($id);
 
-            $table = $attribute->entityTypeId;
-            $adapter = \Mage::getModel('Model\Attribute')->getAdapter();
-            echo $query = "ALTER TABLE `{$table}` ADD `{$attribute->code}` $attribute->backendType(20);";
-            $adapter->update($query);
-            $attribute->save();
+                if (!$configGroup){
+                    throw new \Exception ("Records not found.");
+                }
+            }
+            else {
+                $configGroup->createdDate = date("Y-m-d H:i:s");
+            }
+            $configGroupData = $this->getRequest()->getPost('configGroup'); 
+            $configGroup->setData($configGroupData);
+            $configGroup->save();
             $this->getMessage()->setSuccess('Record Inserted Successfully.');
         }
         catch(\Exception $e){
@@ -69,9 +70,10 @@ class Attribute extends \Controller\Core\Admin
             if(!$id){
                 throw new \Exception("Invalid ID.");    
             }
-            $attribute = \Mage::getModel('Model\Attribute');
-            $attribute->load($id);
-            if($attribute->delete()) {
+            $configGroup = \Mage::getModel('Model\Config\Group');
+            $configGroup->load($id);
+            
+            if($configGroup->delete()) {
                 $this->getMessage()->setSuccess('Record Deleted Successfully.');
             }
             else {
@@ -81,11 +83,7 @@ class Attribute extends \Controller\Core\Admin
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);        
-    }
-
-    public function updateAction()
-    {
         $this->redirect('grid',null,null,true);
+        
     }
 }

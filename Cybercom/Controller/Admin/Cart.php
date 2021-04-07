@@ -16,10 +16,7 @@ class Cart extends \Controller\Core\Admin
             }
             $cart = $this->getCart();
             $cart->addItemToCart($product, 1, true);
-            $cart->total();
-            //die;
             $this->getMessage()->setSuccess('Item Successfully added into cart');
-
 
         } catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
@@ -225,11 +222,12 @@ class Cart extends \Controller\Core\Admin
     }
 
     public function saveShippingAction()
-    {
+    { 
         $shippingId = $this->getRequest()->getPost('shippingId');
         $cart = $this->getCart();
         $shipping = \Mage::getModel("Model\Shipping")->load($shippingId);
         $cart->shippingId = $shipping->shippingId;
+        $cart->shippingAmount = $shipping->amount;
         $cart->save();
         $this->redirect('index','Admin\Cart',null,true);   
     }

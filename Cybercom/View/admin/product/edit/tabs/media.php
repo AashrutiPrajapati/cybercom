@@ -21,13 +21,13 @@
         <?php } else { ?>     
         <?php foreach($media as $key=>$value){ ?>
             <tr>
-                <td><image src="<?php echo $value['image']; ?>" height="100" width="100"></td>
-                <td><input type="text" name="label[<?php echo $value['mediaId'] ?>]" value="<?php echo $value['label'];?>"></td>		
-                <td><input type="radio" name="small" value="<?php echo $value['mediaId'] ?>" <?php if($value['small'])echo "checked";?>></td>
-                <td><input type="radio" name="thumb" value="<?php echo $value['mediaId'] ?>" <?php if($value['thumb'])echo "checked";?>></td>
-                <td><input type="radio" name="base" value="<?php echo $value['mediaId'] ?>" <?php if($value['base'])echo "checked";?>></td>
-                <td><input type="checkbox" name="gallery[<?php echo $value['mediaId'] ?>]" <?php if($value['gallery'])echo "checked";?>></td>
-                <td><input type="checkbox" name="delete[<?php echo $value['mediaId'] ?>]"></td>
+                <td><image src="<?php echo $value->image; ?>" height="100" width="100"></td>
+                <td><input type="text" name="label[<?php echo $value->mediaId ?>]" value="<?php echo $value->label;?>"></td>		
+                <td><input type="radio" name="small" value="<?php echo $value->mediaId ?>" <?php if($value->small)echo "checked";?>></td>
+                <td><input type="radio" name="thumb" value="<?php echo $value->mediaId ?>" <?php if($value->thumb)echo "checked";?>></td>
+                <td><input type="radio" name="base" value="<?php echo $value->mediaId ?>" <?php if($value->base)echo "checked";?>></td>
+                <td><input type="checkbox" name="gallery[<?php echo $value->mediaId ?>]" <?php if($value->gallery)echo "checked";?>></td>
+                <td><input type="checkbox" name="delete[<?php echo $value->mediaId ?>]"></td>
             </tr>
         <?php } }?>
     </table><br>

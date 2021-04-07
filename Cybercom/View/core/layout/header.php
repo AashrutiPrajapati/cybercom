@@ -20,6 +20,9 @@
     </ul>
     <ul class="navbar-nav">
             <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\config\Group',null,true); ?>">Configuration</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\shipping',null,true); ?>">Shipping Method</a>
             </li>
             <li class="nav-item">

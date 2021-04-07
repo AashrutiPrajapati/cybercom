@@ -37,6 +37,7 @@
                 <th>Product Id</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Base Price</th>
                 <th>Row Price</th>
                 <th>Discount</th>
                 <th>Total Price</th>
@@ -55,7 +56,7 @@
                         <td><input type="number" name = "quantity[<?php echo $item->cartItemId?>]" value = "<?php echo $item->quantity; ?>"></td>
                         <td><input type="number" name = "price[<?php echo $item->cartItemId?>]" value = "<?php echo $item->price; ?>"></td>
                         
-                        <!-- <td><?php //echo $item->price; ?></td> -->
+                        <td><?php echo $item->basePrice=$item->price; ?></td>
                         <td><?php echo $item->price * $item->quantity; ?></td>
                         <td><?php echo $item->discount * $item->quantity; ?></td>
                         <td><?php echo ($item->quantity * $item->price) - ($item->discount * $item->quantity)?></td>
@@ -145,7 +146,7 @@
                 </tr>
                 <tr>
                     <td><?php foreach ($payment->getData() as $key => $value) { ?>
-                        <?php echo $value->name;?><input name= "paymentId" type="radio" value="<?php echo $value->paymentId; ?>" <?php if($payment->paymentId == $cart->paymentId) {echo "selected";}?>><br>
+                        <?php echo $value->name;?><input name= "paymentId" type="radio" value="<?php echo $value->paymentId; ?>" <?php if($value->paymentId == $cart->paymentId) {echo "checked";}?>><br>
                     <?php }?>
                     </td>
                 </tr>
@@ -161,24 +162,24 @@
                 </tr>
                 <tr>
                     <td><?php foreach ($shipping->getData() as $key => $value) { ?>
-                            <?php echo $value->name;?><input name= "shippingId" type="radio"  value="<?php echo $value->shippingId; ?>"><br>
+                            <?php echo $value->name;?><input name= "shippingId" type="radio"  value="<?php echo $value->shippingId; ?>" <?php if($value->shippingId == $cart->shippingId) {echo "checked";}?>><br>
                         <?php }?>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Save" onclick="saveShipping();" class="btn btn-success font-weight-bold" style="padding:5px 20px"></td>
+                    <td><input type="submit" value="Save" onclick="saveShipping();" class="btn btn-success font-weight-bold" style="padding:5px 20px" ></td>
                 </tr>
             </table>
         </div>
         <div class="col-lg-6">
             <table class="table table-bordered">
                 <tr>
-                    <td>Base Total : <br>
-                        Shipping Charges : <br> 
+                    <td>Base Total : <?php echo $this->getBaseTotal(); ?><br>
+                        Shipping Charges : <?php echo $cart->shippingAmount; ?><br> 
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold">GRAND TOTAL : </td>
+                    <td class="font-weight-bold">GRAND TOTAL : <?php echo ($this->getBaseTotal()+$cart->shippingAmount); ?></td>
                 </tr>
             </table>
         </div>

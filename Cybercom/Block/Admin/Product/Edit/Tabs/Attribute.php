@@ -1,6 +1,5 @@
 <?php
 namespace Block\Admin\Product\Edit\Tabs;
-\Mage::loadFileByClassName('Block\Core\Edit');
 
 class Attribute extends \Block\Core\Edit
 {
@@ -17,6 +16,7 @@ class Attribute extends \Block\Core\Edit
             return $this;
         }
         $attribute = \Mage::getModel('Model\Attribute');
+        
         $query = "SELECT * 
         FROM `{$attribute->getTableName()}` 
         WHERE `entityTypeId` = 'product' 

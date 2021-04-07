@@ -25,15 +25,12 @@ class Media extends \Block\Core\Edit
             $array = $product->fetchAll($query);
 
             if($array){
-                foreach($array->getData() as $key=>$value){
-                    $this->media[] = $value->getData();
-                }
+                $this->media = $array->getData();
             }
         }
         return $this;
     }
     
-
     public function getMedia(){
         if (!$this->media){
             $this->setMedia();

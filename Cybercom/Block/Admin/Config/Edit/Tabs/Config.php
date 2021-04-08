@@ -4,7 +4,6 @@ namespace Block\Admin\Config\Edit\Tabs;
 class Config extends \Block\Core\Edit
 {
     protected $configGroup = [];
-    protected $configs = [];
 
     public function __construct()
     {   
@@ -33,28 +32,4 @@ class Config extends \Block\Core\Edit
         return $this->configGroup;
     }
 
-    public function setConfigs($configs = null){
-        if ($configs) {
-            $this->$configs = $configs;
-            return $this;
-        }
-        if($groupId = $this->getTableRow()->groupId){
-            $configGroupConfig = \Mage::getModel('Model\Config\Group\Config');
-            $query = "SELECT * FROM {$configGroupConfig->getTableName()} WHERE `groupId` = {$groupId};";
-            $configs = $configGroupConfig->fetchAll($query);
-            if($configs){
-                $this->configs = $configs;
-                return $this;
-            }
-        }
-        $this->configs = $configs;
-        return $this;
-    }
-
-    public function getConfigs(){
-        if (!$this->configs) {
-            $this->setConfigs();
-        }
-        return $this->configs;
-    }
 }

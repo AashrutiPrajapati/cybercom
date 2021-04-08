@@ -11,7 +11,8 @@ class Config extends \Controller\Core\Admin
 
         $query =  "SELECT `configId` FROM `config` WHERE `groupId`={$groupId}";
         $array = $configGroup->fetchAll($query);
-        //print_r($array); die;
+        // echo "<pre>";
+        // print_r($array); die;
         if($array){
             foreach($array->getData() as $key=>$value){
                 $ids[] = $value->configId;
@@ -22,9 +23,10 @@ class Config extends \Controller\Core\Admin
             foreach ($exist as $key => $value) {
                 unset($ids[array_search($key,$ids)]);
                 $query = "UPDATE `config` 
-                SET `groupId`={$groupId},`title`='{$value['title']}',`code`={$value['code']},`value`={$value['value']} 
+                SET `groupId`={$groupId},`title`='{$value['title']}',`code`='{$value['code']}',`value`='{$value['value']}' 
                 WHERE `configId` = {$key}";
                 $configGroup->save($query);
+                
             }
         }
         
@@ -32,15 +34,17 @@ class Config extends \Controller\Core\Admin
             $query = "DELETE FROM `config` WHERE `configId` IN (".implode(",",$ids).")";
             $configGroup->save($query);
         }
+
         if($new = $this->getRequest()->getPost('new')){
             foreach ($new as $key => $value) {
                 foreach($value as $key2=>$value2){
                     $newArray[$key2][$key] = $value2;
                 }
             }
-            foreach($newArray as $key=>$value){
-                $query = "INSERT INTO `config`(`groupId`, `title`, `code`,`value`) 
-                VALUES ({$groupId},{$value['title']},{$value['code']},{$value['value']})";
+            //print_r($newArray); die;
+            foreach($newArray as $key => $value){
+                echo $query = "INSERT INTO `config`(`groupId`, `title`, `code`,`value`) 
+                VALUES ({$groupId},'{$value['title']}','{$value['code']}','{$value['value']}')";
                 $configGroup->save($query);
             }
         }

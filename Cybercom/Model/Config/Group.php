@@ -9,7 +9,7 @@ class Group extends \Model\Core\Table
     }
 
     public function getConfig()
-    {
+    { 
         if(!$this->groupId){
             return false;
         }

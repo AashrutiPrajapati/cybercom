@@ -58,8 +58,8 @@ class Adapter {
         if (!$this->isConnected()) {
             $this->connection();
         }
-       // $result = $this->getConnect()->query($query);
-        $request = mysqli_query($this->getConnect(),$query) or $this->error($this->getConnect()->errno, $this->getConnect()->error, $query);
+       $result = $this->getConnect()->query($query);
+        //$request = mysqli_query($this->getConnect(),$query) or $this->error($this->getConnect()->errno, $this->getConnect()->error, $query);
         if (!$result) {
             return false;
             //echo "Not Inserted";

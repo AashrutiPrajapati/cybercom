@@ -5,28 +5,32 @@ class Group extends \Controller\Core\Admin
 {
     public function gridAction()
     {
-        $layout = $this->getLayout();
-        $layout->setTemplate('./View/core/layout/oneColumn.php');
-        $grid = \Mage::getBlock('Block\Admin\Config\Grid');
-        $content = $layout->getChild('content');
-        $content->addChild($grid);
-        echo $this->toHtmlLayout();
-
+        // $layout = $this->getLayout();
+        // $layout->setTemplate('./View/core/layout/oneColumn.php');
+        // $grid = \Mage::getBlock('Block\Admin\Config\Grid');
+        // $content = $layout->getChild('content');
+        // $content->addChild($grid);
+        // echo $this->toHtmlLayout();
+        $gridHtml = \Mage::getBlock('Block\Admin\Config\Grid')->toHtml();
+        $this->responseHtml($gridHtml);
     }
 
     public function editAction()
     {
         try{
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
+            // $layout = $this->getLayout(); 
+            // $content = $layout->getChild('content');
             $configGroup = \Mage::getModel('Model\Config\Group');
 
             if ($id = $this->getRequest()->getGet('id')){   
                 $configGroup = $configGroup->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Config\Edit')->setTableRow($configGroup);
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            $leftBlock = \Mage::getBlock('Block\Admin\Config\Edit\Tabs');
+            $edit =  \Mage::getBlock('Block\Admin\Config\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($configGroup)->toHtml();
+            $this->responseHtml($edit);
+            // $content->addChild($edit);
+            // echo $this->toHtmlLayout();
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -60,7 +64,8 @@ class Group extends \Controller\Core\Admin
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 
     public function deleteAction()
@@ -83,7 +88,7 @@ class Group extends \Controller\Core\Admin
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
         
     }
 }

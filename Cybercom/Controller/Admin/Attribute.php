@@ -1,33 +1,39 @@
 <?php
 namespace Controller\Admin;
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 class Attribute extends \Controller\Core\Admin
 {
     public function gridAction()
     {
-        $grid = \Mage::getBlock('Block\Admin\Attribute\Grid');
-        $layout = $this->getLayout();
-        $layout->setTemplate('./View/core/layout/oneColumn.php');
-        $content = $layout->getChild('content');
-        $content->addChild($grid);
-        echo $this->toHtmlLayout();
+        // $grid = \Mage::getBlock('Block\Admin\Attribute\Grid');
+        // $layout = $this->getLayout();
+        // $layout->setTemplate('./View/core/layout/oneColumn.php');
+        // $content = $layout->getChild('content');
+        // $content->addChild($grid);
+        // echo $this->toHtmlLayout();
+        $gridHtml = \Mage::getBlock('Block\Admin\Attribute\Grid')->toHtml();
+        $this->responseHtml($gridHtml);
     }
 
     public function editAction()
     {
         try{
-            $layout = $this->getLayout(); 
-            //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Attribute\Edit\Tabs'));
-            $content = $layout->getChild('content');
+            // $layout = $this->getLayout(); 
+            // //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Attribute\Edit\Tabs'));
+            // $content = $layout->getChild('content');
             $attribute = \Mage::getModel('Model\Attribute');
 
             if ($id = $this->getRequest()->getGet('id')){   
                 $attribute = $attribute->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Attribute\Edit')->setTableRow($attribute);
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            // $edit =  \Mage::getBlock('Block\Admin\Attribute\Edit')->setTableRow($attribute);
+            // $content->addChild($edit);
+            // echo $this->toHtmlLayout();
+            $leftBlock = \Mage::getBlock('Block\Admin\Attribute\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\Attribute\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($attribute)->toHtml();
+            // $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->setTableRow($payment)->toHtml();
+            $this->responseHtml($edit);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -51,7 +57,7 @@ class Attribute extends \Controller\Core\Admin
 
             $table = $attribute->entityTypeId;
             $adapter = \Mage::getModel('Model\Attribute')->getAdapter();
-            echo $query = "ALTER TABLE `{$table}` ADD `{$attribute->code}` $attribute->backendType(20);";
+            $query = "ALTER TABLE `{$table}` ADD `{$attribute->code}` $attribute->backendType(20);";
             $adapter->update($query);
             $attribute->save();
             $this->getMessage()->setSuccess('Record Inserted Successfully.');
@@ -59,7 +65,8 @@ class Attribute extends \Controller\Core\Admin
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 
     public function deleteAction()
@@ -80,12 +87,14 @@ class Attribute extends \Controller\Core\Admin
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
-        }  
-        $this->redirect('grid',null,null,true);        
+        }
+        $this->gridAction();  
+        //$this->redirect('grid',null,null,true);        
     }
 
     public function updateAction()
     {
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 }

@@ -1,20 +1,22 @@
 <?php
 namespace Controller\Admin;
-\Mage::loadFileByClassName('Controller\Core\Admin');
-\Mage::loadFileByClassName('Block\Core\Layout');
 
 class Shipping extends \Controller\Core\Admin {
     protected $shippings = [];
 
     public function gridAction (){
         try {
-            $grid = \Mage::getBlock('Block\Admin\Shipping\Grid');
-            //$grid->setController($this);
-            $layout = $this->getLayout(); 
-            $layout->setTemplate('./View/core/layout/oneColumn.php');
-            $content = $layout->getChild('content');
-            $content->addChild($grid);
-            echo $this->toHtmlLayout();
+            // $layout = $this->getLayout();
+            // $grid = \Mage::getBlock('Block\Admin\Admin\Grid');
+            // // $grid->setController($this);
+             
+            // $layout->setTemplate('./View/core/layout/oneColumn.php');
+            // $content = $layout->getChild('content');
+            // $content->addChild($grid);
+            // echo $this->toHtmlLayout();
+            
+            $gridHtml = \Mage::getBlock('Block\Admin\Shipping\Grid')->toHtml();
+            $this->responseHtml($gridHtml);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -50,20 +52,22 @@ class Shipping extends \Controller\Core\Admin {
             $this->getMessage()->setFailure($e->getMessage());
             //echo $e->getMessage();
         }
-        $this->redirect("grid",null,null,true);
+        $this->gridAction();
+        //$this->redirect("grid",null,null,true);
     }
 
     public function editAction(){
         try{
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
             $shipping = \Mage::getModel('Model\Shipping');
             if ($id = $this->getRequest()->getGet('id')){   
                 $shipping = $shipping->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Shipping\Edit')->setTableRow($shipping);
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            //$edit =  \Mage::getBlock('Block\Admin\Shipping\Edit')->setTableRow($shipping);
+            
+            $leftBlock = \Mage::getBlock('Block\Admin\Shipping\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\Shipping\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($shipping)->toHtml();
+            $this->responseHtml($edit);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -90,7 +94,7 @@ class Shipping extends \Controller\Core\Admin {
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);;
+        $this->gridAction();
         
     }
 }

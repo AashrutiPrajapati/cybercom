@@ -56,7 +56,7 @@ class Abstracts
 		}
 		return $this->message;
 	}
-
+	
 	public function responseHtml($grid='', $left='')
 	{
 		$response = [
@@ -73,7 +73,7 @@ class Abstracts
 				],
 				[
 					'selector' => '#left',
-					'html' => $leftside 
+					'html' => $left 
 				]
 			]
 		];

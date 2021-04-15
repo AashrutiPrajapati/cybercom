@@ -3,20 +3,22 @@ namespace Controller\Admin;
 \Mage::loadFileByClassName('Controller\Core\Admin');
 \Mage::loadFileByClassName('Block\Core\Layout');
 
-class Customer extends \Controller\Core\Admin {
+class Customer extends \Controller\Core\Admin 
+{
     protected $customers = [];
 
     public function gridAction () {
         // echo __CLASS__;
         // echo __FUNCTION__;
         try {
-            $grid = \Mage::getBlock('Block\Admin\Customer\Grid');
-            //$grid->setController($this);
-            $layout = $this->getLayout(); 
-            $layout->setTemplate('./View/core/layout/oneColumn.php');
-            $content = $layout->getChild('content');
-            $content->addChild($grid);
-            echo $this->toHtmlLayout();
+            // $grid = \Mage::getBlock('Block\Admin\Customer\Grid');
+            // $layout = $this->getLayout(); 
+            // $layout->setTemplate('./View/core/layout/oneColumn.php');
+            // $content = $layout->getChild('content');
+            // $content->addChild($grid);
+            // echo $this->toHtmlLayout();
+            $gridHtml = \Mage::getBlock('Block\Admin\Customer\Grid')->toHtml();
+            $this->responseHtml($gridHtml);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -51,7 +53,8 @@ class Customer extends \Controller\Core\Admin {
             $this->getMessage()->setFailure($e->getMessage());
             //echo $e->getMessage();
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 
     public function addressSaveAction()
@@ -95,23 +98,27 @@ class Customer extends \Controller\Core\Admin {
         }catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 
 
     public function editAction(){
         try{
-            $layout = $this->getLayout(); 
-            //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Customer\Edit\Tabs'));
-            $content = $layout->getChild('content');
+            // $layout = $this->getLayout(); 
+            // //$layout->getLeft()->addChild(\Mage::getBlock('Block\Admin\Customer\Edit\Tabs'));
+            // $content = $layout->getChild('content');
             $customer = \Mage::getModel('Model\Customer');
             if ($id = $this->getRequest()->getGet('id')){   
                 $customer = $customer->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Customer\Edit')->setTableRow($customer);
-
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            $leftBlock = \Mage::getBlock('Block\Admin\Customer\Edit\Tabs');
+            $edit =  \Mage::getBlock('Block\Admin\Customer\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($customer)->toHtml();
+            $this->responseHtml($edit);
+            //$edit =  \Mage::getBlock('Block\Admin\Customer\Edit')->setTableRow($customer);
+            // $content->addChild($edit);
+            // echo $this->toHtmlLayout();
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -136,7 +143,8 @@ class Customer extends \Controller\Core\Admin {
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        // $this->redirect('grid',null,null,true);
         
     }
 

@@ -122,12 +122,10 @@ class Table
                     $args[] = "`$key` = '$value'";
                 }
                 $id = $this->originalData[$this->getPrimaryKey()];
+                //print_r($id); die;
                 //array_shift($args);
                 $query = "UPDATE `{$this->getTableName()}`  SET ".implode(",",$args) . " WHERE  `{$this->getPrimaryKey()}` = '{$id}'"; 
-                return $this->getAdapter()->update($query);
             }
-            
-            return $this->load($id);      
         }
         return $this->getAdapter()->update($query);
 

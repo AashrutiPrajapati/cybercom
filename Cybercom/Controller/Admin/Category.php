@@ -3,27 +3,29 @@ namespace Controller\Admin;
 \Mage::loadFileByClassName('Controller\Core\Admin');
 \Mage::loadFileByClassName('Block\Core\Layout');
 
-class Category extends \Controller\Core\Admin {
+class Category extends \Controller\Core\Admin 
+{
     protected $category = NULL;
 
-   public function gridAction()
+    public function gridAction()
     {
         try
         {  
-            $layout=$this->getLayout();
-            $gridBlock=\Mage::getBlock("Block\Admin\Category\Grid");
-             
-            $content=$layout->getChild('content');
-            $content->addChild($gridBlock);
-            $layout->setTemplate("View/core/layout/oneColumn.php");
-            echo $this->tohtmlLayout();
+            // $layout=$this->getLayout();
+            // $gridBlock=\Mage::getBlock("Block\Admin\Category\Grid"); 
+            // $content=$layout->getChild('content');
+            // $content->addChild($gridBlock);
+            // $layout->setTemplate("View/core/layout/oneColumn.php");
+            // echo $this->tohtmlLayout();
+            $gridBlock=\Mage::getBlock("Block\Admin\Category\Grid")->toHtml();
+            $this->responseHtml($gridBlock); 
         }
         catch(\Exception $e)
         {
             $e->getMessage();
-          
         }
     }
+
     public function saveAction()
     { 
         try {
@@ -55,24 +57,23 @@ class Category extends \Controller\Core\Admin {
         } 
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
-            //echo $e->getMessage();
         }
-        $this->redirect('grid',null,null,true);
+        //$this->redirect('grid',null,null,true);
+        $this->gridAction();
     }
 
     public function editAction()
     {
         try{
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
             $category = \Mage::getModel('Model\Category');
             if ($id = (int)$this->getRequest()->getGet('id')){   
                 $category = $category->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Category\Edit')->setTableRow($category);
-
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            //$edit =  \Mage::getBlock('Block\Admin\Category\Edit')->setTableRow($category);
+            $leftBlock = \Mage::getBlock('Block\Admin\Category\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\Category\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($category)->toHtml();
+            $this->responseHtml($edit);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -104,9 +105,9 @@ class Category extends \Controller\Core\Admin {
         }  
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
-            //echo $e->getMessage();
-        }   
-        $this->redirect('grid',null,null,true);     
+        } 
+        $this->gridAction();  
+        //$this->redirect('grid',null,null,true);     
     }
 }
 

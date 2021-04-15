@@ -9,13 +9,8 @@ class CustomerGroup extends \Controller\Core\Admin
         //echo __CLASS__;
         //echo __FUNCTION__;
         try {
-            $grid = \Mage::getBlock('Block\Admin\CustomerGroup\Grid');
-            //$grid->setController($this);
-            $layout = $this->getLayout(); 
-            $layout->setTemplate('./View/core/layout/oneColumn.php');
-            $content = $layout->getChild('content');
-            $content->addChild($grid);
-            echo $this->toHtmlLayout();
+            $gridHtml = \Mage::getBlock('Block\Admin\CustomerGroup\Grid')->toHtml();
+            $this->responseHtml($gridHtml);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -50,17 +45,21 @@ class CustomerGroup extends \Controller\Core\Admin
             $this->getMessage()->setFailure($e->getMessage());
             //echo $e->getMessage();
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
+        //$this->redirect('grid',null,null,true);
     }
 
     public function editAction(){
         try{
-            $edit =  \Mage::getBlock('Block\Admin\CustomerGroup\Edit');
-            //$edit->setController($this);
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            $customerGroup = \Mage::getModel('Model\CustomerGroup');
+            if ($id = (int)$this->getRequest()->getGet('id')){   
+                $customerGroup = $customerGroup->load($id);
+            }  
+            //$edit =  \Mage::getBlock('Block\Admin\CustomerGroup\Edit')->setTableRow($customerGroup);
+            $leftBlock = \Mage::getBlock('Block\Admin\CustomerGroup\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\CustomerGroup\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($customerGroup)->toHtml();
+            $this->responseHtml($edit);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -86,8 +85,9 @@ class CustomerGroup extends \Controller\Core\Admin
         }
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
-        }  
-        $this->redirect('grid',null,null,true);
+        }
+        $this->gridAction();  
+        //$this->redirect('grid',null,null,true);
         
     }
 }

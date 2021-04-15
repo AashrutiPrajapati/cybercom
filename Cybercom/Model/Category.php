@@ -16,7 +16,8 @@ class Category extends Core\Table
             $pathId = $this->categoryId;
         }
         else {
-            $parent = \Mage::getBlock('Block\Admin\Category\Edit')->getTableRow()->load($this->parentId);
+            //$parent = \Mage::getBlock('Block\Admin\Category\Edit')->getTableRow()->load($this->parentId);
+            $parent = \Mage::getModel('Model\Category')->load($this->parentId);
             $pathId = $parent->pathId."=".$this->categoryId;
         }
         $this->pathId = $pathId;

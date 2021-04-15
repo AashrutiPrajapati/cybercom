@@ -1,7 +1,5 @@
 <?php
 namespace Controller\Admin;
-\Mage::loadFileByClassName('Controller\Core\Admin');
-\Mage::loadFileByClassName('Block\Core\Layout');
 
 class CmsPage extends \Controller\Core\Admin {
     protected $cmsPages = [];
@@ -10,13 +8,17 @@ class CmsPage extends \Controller\Core\Admin {
         // echo __CLASS__;
         // echo __FUNCTION__;
         try {
-            $grid = \Mage::getBlock('Block\Admin\CmsPage\Grid');
-            //$grid->setController($this);
-            $layout = $this->getLayout(); 
-            $layout->setTemplate('./View/core/layout/oneColumn.php');
-            $content = $layout->getChild('content');
-            $content->addChild($grid);
-            echo $this->toHtmlLayout();
+            // $grid = \Mage::getBlock('Block\Admin\CmsPage\Grid');
+            // //$grid->setController($this);
+            // $layout = $this->getLayout(); 
+            // $layout->setTemplate('./View/core/layout/oneColumn.php');
+            // $content = $layout->getChild('content');
+            // $content->addChild($grid);
+            // echo $this->toHtmlLayout();
+            $gridHtml = \Mage::getBlock('Block\Admin\CmsPage\Grid')->toHtml();
+            $this->responseHtml($gridHtml);
+
+
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -50,20 +52,31 @@ class CmsPage extends \Controller\Core\Admin {
             $this->getMessage()->setFailure($e->getMessage());
             //echo $e->getMessage();
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
     }
 
     public function editAction(){
         try{
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
+            // $layout = $this->getLayout(); 
+            // $content = $layout->getChild('content');
             $cmsPage = \Mage::getModel('Model\CmsPage');
             if ($id = $this->getRequest()->getGet('id')){   
                 $cmsPage = $cmsPage->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\CmsPage\Edit')->setTableRow($cmsPage);
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            // $edit =  \Mage::getBlock('Block\Admin\CmsPage\Edit')->setTableRow($cmsPage);
+            // $content->addChild($edit);
+            // echo $this->toHtmlLayout();
+            // $leftBlock = \Mage::getBlock('Block\Admin\CmsPage\Edit\Tabs');
+            // $edit =  \Mage::getBlock('Block\Admin\CmsPage\Edit');
+            // $edit = $edit->setTab('leftBlock')->setTableRow($cmsPage)->toHtml();
+            // $this->responseHtml($edit);
+
+            $leftBlock = \Mage::getBlock('Block\Admin\CmsPage\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\CmsPage\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($cmsPage)->toHtml();
+            // $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->setTableRow($payment)->toHtml();
+            $this->responseHtml($edit);
+
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -89,7 +102,7 @@ class CmsPage extends \Controller\Core\Admin {
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
         
     }
 }

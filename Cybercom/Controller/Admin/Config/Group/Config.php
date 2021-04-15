@@ -1,6 +1,5 @@
 <?php
 namespace Controller\Admin\Config\Group;
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 class Config extends \Controller\Core\Admin
 {
@@ -48,7 +47,9 @@ class Config extends \Controller\Core\Admin
                 $configGroup->save($query);
             }
         }
-        $this->redirect('edit','admin\config\group');
+        $editHtml = \Mage::getBlock('Block\Admin\Config\Edit\Tabs\Config')->toHtml();
+        $this->responseHtml($editHtml);
+        //$this->redirect('edit','admin\config\group');
     }
 }
 ?>

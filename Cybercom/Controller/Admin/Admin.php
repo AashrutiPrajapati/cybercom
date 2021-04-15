@@ -9,14 +9,16 @@ class Admin extends \Controller\Core\Admin
 
     public function gridAction (){
         try {
-            $layout = $this->getLayout();
-            $grid = \Mage::getBlock('Block\Admin\Admin\Grid');
-            // $grid->setController($this);
+            // $layout = $this->getLayout();
+            // $grid = \Mage::getBlock('Block\Admin\Admin\Grid');
+            // // $grid->setController($this);
              
-            $layout->setTemplate('./View/core/layout/oneColumn.php');
-            $content = $layout->getChild('content');
-            $content->addChild($grid);
-            echo $this->toHtmlLayout();
+            // $layout->setTemplate('./View/core/layout/oneColumn.php');
+            // $content = $layout->getChild('content');
+            // $content->addChild($grid);
+            // echo $this->toHtmlLayout();
+            $gridHtml = \Mage::getBlock('Block\Admin\Admin\Grid')->toHtml();
+            $this->responseHtml($gridHtml);
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -51,20 +53,24 @@ class Admin extends \Controller\Core\Admin
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
         }
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
     }
 
     public function editAction(){
         try{
-            $layout = $this->getLayout(); 
-            $content = $layout->getChild('content');
+            // $layout = $this->getLayout(); 
+            // $content = $layout->getChild('content');
             $admin = \Mage::getModel('Model\Admin');
-             if ($id = $this->getRequest()->getGet('id')){   
+            if ($id = $this->getRequest()->getGet('id')){   
                 $admin = $admin->load($id);
             }
-            $edit =  \Mage::getBlock('Block\Admin\Admin\Edit')->setTableRow($admin);
-            $content->addChild($edit);
-            echo $this->toHtmlLayout();
+            $leftBlock = \Mage::getBlock('Block\Admin\Admin\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\Admin\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($admin)->toHtml();
+            $this->responseHtml($edit);
+
+            // $content->addChild($edit);
+            // echo $this->toHtmlLayout();
         }
         catch (\Exception $e) {
             $e->getMessage();
@@ -90,7 +96,7 @@ class Admin extends \Controller\Core\Admin
         catch (\Exception $e) {
             $this->getMessage()->setFailure($e->getMessage());
         }  
-        $this->redirect('grid',null,null,true);
+        $this->gridAction();
         
     }
 }

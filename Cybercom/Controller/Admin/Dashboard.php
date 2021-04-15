@@ -7,12 +7,14 @@ class Dashboard extends \Controller\Core\Admin {
     
     public function gridAction()
     {
-        $layout = $this->getLayout();
-        $content = $layout->getChild('content');
-        $layout->setTemplate('./View/core/layout/oneColumn.php');
-        $grid = \Mage::getBlock('Block\Admin\Dashboard\Grid');
-        $content->addChild($grid);
-        echo $this->toHtmlLayout();
+        // $layout = $this->getLayout();
+        // $content = $layout->getChild('content');
+        // $layout->setTemplate('./View/core/layout/oneColumn.php');
+        // $grid = \Mage::getBlock('Block\Admin\Dashboard\Grid');
+        // $content->addChild($grid);
+        // echo $this->toHtmlLayout();
+        $gridBlock=\Mage::getBlock("Block\Admin\Dashboard\Grid")->toHtml();
+        $this->responseHtml($gridBlock);
     }
 
     // public function pageAction()

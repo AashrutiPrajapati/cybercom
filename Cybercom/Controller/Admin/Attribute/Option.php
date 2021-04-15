@@ -1,6 +1,5 @@
 <?php
 namespace Controller\Admin\Attribute;
-\Mage::loadFileByClassName('Controller\Core\Admin');
 
 class Option extends \Controller\Core\Admin
 {
@@ -43,7 +42,9 @@ class Option extends \Controller\Core\Admin
                 $attribute->save($query);
             }
         }
-        $this->redirect('edit','admin\attribute');
+        $editHtml = \Mage::getBlock('Block\Admin\Attribute\Edit\Tabs\Option')->toHtml();
+        $this->responseHtml($editHtml);
+        //$this->redirect('edit','admin\attribute');
     }
 }
 ?>

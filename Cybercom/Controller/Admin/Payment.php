@@ -3,39 +3,14 @@ namespace Controller\Admin;
 \Mage::loadFileByClassName('Controller\Core\Admin');
 \Mage::loadFileByClassName('Block\Core\Layout');
 
-class Payment extends \Controller\Core\Admin {
+class Payment extends \Controller\Core\Admin 
+{
     protected $payments = [];
-
-    
-    public function indexAction()
-    {
-        $layout = $this->getLayout();
-        $content = $layout->getChild('content');
-        $layout->setTemplate('./View/core/layout/oneColumn.php');
-        //$grid = \Mage::getBlock('Block\Admin\Payment\Grid');
-        //$content->addChild($grid);
-        echo $this->toHtmlLayout();
-    }
 
     public function gridAction (){
         $gridHtml = \Mage::getBlock('Block\Admin\Payment\Grid')->toHtml();
         $this->responseHtml($gridHtml);
     }
-
-    //     public function gridAction ()
-    //     {
-    //     try {
-    //         $grid = \Mage::getBlock('Block\Admin\Payment\Grid');
-    //         $layout = $this->getLayout(); 
-    //         $layout->setTemplate('./View/core/layout/oneColumn.php');
-    //         $content = $layout->getChild('content');
-    //         $content->addChild($grid);
-    //         echo $this->toHtmlLayout();
-    //     }
-    //     catch (\Exception $e) {
-    //         $e->getMessage();
-    //     }  
-    // }
 
     public function saveAction() {
         try{
@@ -59,15 +34,13 @@ class Payment extends \Controller\Core\Admin {
             $payment->setData($paymentData);
             $payment->save();
             $this->getMessage()->setSuccess('Record Inserted Successfully.');
+            // $gridHtml = \Mage::getBlock('Block\Admin\Payment\Grid')->toHtml();
+            // $this->responseHtml($gridHtml);
         }
         catch(\Exception $e){
             $this->getMessage()->setFailure($e->getMessage());
-            //echo $e->getMessage();
         }
-        // $gridHtml = \Mage::getBlock('Block\Admin\Payment\Grid')->toHtml();
-        // $this->responseHtml($gridHtml);
         $this->gridAction();
-        //$this->redirect('grid',null,null,true);
     }
 
     public function editAction(){
@@ -79,11 +52,13 @@ class Payment extends \Controller\Core\Admin {
                 $payment = $payment->load($id);
             }   
 
-            $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->setTableRow($payment)->toHtml();
+            $leftBlock = \Mage::getBlock('Block\Admin\Payment\Edit\Tabs');
+            $edit = \Mage::getBlock('Block\Admin\Payment\Edit');
+            $edit = $edit->setTab($leftBlock)->setTableRow($payment)->toHtml();
+            // $edit = \Mage::getBlock('Block\Admin\Payment\Edit')->setTableRow($payment)->toHtml();
             $this->responseHtml($edit);
             
             // $edit =  \Mage::getBlock('Block\Admin\Payment\Edit');
-            // //$edit->setController($this);
             // $layout = $this->getLayout(); 
             // $content = $layout->getChild('content');
             // $content->addChild($edit);

@@ -1,6 +1,4 @@
-<?php
-$cmsPage = $this->getTableRow();
-?>
+<?php $cmsPage = $this->getTableRow(); ?>
 
 <html>
 <head>
@@ -41,7 +39,7 @@ $cmsPage = $this->getTableRow();
                                 }
                                 ?>
                         </select>
-                    <input type="submit" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
+                    <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
                 
             </div>
         </form>

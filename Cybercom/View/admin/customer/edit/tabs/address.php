@@ -29,7 +29,6 @@ if($address){
                         };
                     ?>">
             </div>
-
             <div class="col-6">
                 <label for="city" class=" control-label">CITY</label><br>
                 <input class="form-control" type="text" name="city" value="<?php 
@@ -116,7 +115,7 @@ if($address){
                 ?>">
         </div>
         <div>
-            <input type="submit" value="Save" class="btn btn-success m-4 font-weight-bold" style="padding:5px 30px">
+            <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success m-4 font-weight-bold" style="padding:5px 30px">
             <input type="reset" value="Reset" class="btn btn-success m-4 font-weight-bold" style="padding:5px 30px">
         </div>     
     </div>

@@ -6,7 +6,7 @@
 <div class="container border mt-5 ml-5 p-4"  style="width:100%">
 <form action="<?php echo $this->getUrl('update','Admin\Config\Group\Config'); ?>" method="POST">
     <h5>Add\Update Configuration details(Title,Code,Value)</h5>
-    <input type="submit" name="update" value="Update" class = "btn btn-success mr-2">
+    <input type="button" onclick="object.setForm(this).load()" name="update" value="Update" class = "btn btn-success mr-2">
     <input type="button" name="addConfig" value="Add Config" class = "btn btn-success" onclick="addRow();"><br><br>
     <table id='existingConfig'>
             <?php if(!$configGroup->getConfig()) : ?>
@@ -33,7 +33,7 @@
                 <td><input type="text" name="new[title][]"></td>
                 <td><input type="text" name="new[code][]"></td>
                 <td><input type="text" name="new[value][]"></td>
-                <td><input type="submit" name="new[removeConfig][]" value="Remove Config" class="btn btn-info btn-sm" onclick="removeRow(this)"></td>
+                <td><input type="button" name="new[removeConfig][]" value="Remove Config" class="btn btn-info btn-sm" onclick="removeRow(this)"></td>
             </tr>
         </tbody>
     </table>

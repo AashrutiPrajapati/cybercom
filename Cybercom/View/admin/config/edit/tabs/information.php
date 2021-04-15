@@ -12,7 +12,7 @@
                     </div>
                 
                 </div>
-                <input class="btn btn-success mt-5 font-weight-bold" style="padding:5px 30px" type="submit" value="Save" >
+                <input class="btn btn-success mt-5 font-weight-bold" style="padding:5px 30px" type="button" onclick="object.setForm(this).load()" value="Save" >
 
             </div>
 </form>

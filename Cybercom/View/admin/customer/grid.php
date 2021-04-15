@@ -1,8 +1,7 @@
-<?php $customers=$this->getCustomers();
-?>
+<?php $customers=$this->getCustomers(); ?>
 
 <h2 style="text-align: center;">Customer Records</h2>
-<a href="<?php echo $this->getUrl('edit') ?>" class="btn btn-success ml-5" role="button"><i class="fa fa-sm fa-plus"></i> Add Records</a><br><br>
+<a role="button" onclick="object.setUrl('<?php echo $this->getUrl('edit',null,null,true) ?>').load()" class="btn btn-success ml-5"><i class="fa fa-sm fa-plus"></i> Add Records</a><br><br>
 <table border="2px" cellpadding="3px" class="ml-4" style="border-collapse:collapse">
     <tr class="bg-dark text-white">
         <th>Customer_Id</th>
@@ -28,7 +27,8 @@
             <td>No records!</td>
         </tr>
         <?php else: ?> 
-           <?php foreach ($customers->getData() as $key=>$val) :?>
+            <?php foreach ($customers->getData() as $key=>$val) :?>
+            <?php if($val->addressType == 'Shipping'){continue;} ?>
          <tr>
                 <td><?php echo $val->customerId; ?></td>
                 <td><?php echo $val->groupId; ?></td>
@@ -48,14 +48,9 @@
                 <?php //endif;?>
                 <td><?php echo $val->createdDate; ?></td>
                 <td><?php echo $val->updatedDate; ?></td>
-                <td><a href='<?php echo $this->getUrl('edit', null, ['id' => $val->customerId]) ?>' class="btn btn-info btn-sm">Edit</a>
-                    <a href='<?php echo $this->getUrl('delete', null, ['id' => $val->customerId]) ?>' class="btn btn-danger btn-sm">Delete</a></td>
+                <td><a onclick="object.setUrl('<?php echo $this->getUrl('edit', null, ['id' => $val->customerId]) ?>').load()" class="btn btn-info btn-sm">Edit</a>
+                    <a onclick="object.setUrl('<?php echo $this->getUrl('delete', null, ['id' => $val->customerId]) ?>').load()" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
             <?php endforeach;?>
     <?php endif;?>
-
-        
-
-
-
 </table>

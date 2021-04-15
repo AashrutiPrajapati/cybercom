@@ -4,7 +4,7 @@
 
 <div class="container border mt-5 ml-5 p-4"  style="width:100%">
 <form action="<?php echo $this->getUrl('update','Admin\Attribute\Option'); ?>" method="POST">
-    <input type="submit" name="update" value="Update" class = "btn btn-success mr-2">
+    <input type="buttton" onclick="object.setForm(this).load()" name="update" value="Update" class = "btn btn-success mr-2">
     <input type="button" name="addOption" value="Add Option" class = "btn btn-success" onclick="addRow();"><br><br>
     <table id='existingOption'>
             <?php if(!$attribute->getOption()) : ?>
@@ -29,7 +29,7 @@
             <tr>
                 <td><input type="text" name="new[name][]"></td>
                 <td><input type="text" name="new[sortOrder][]"></td>
-                <td><input type="submit" name="new[removeOption][]" value="Remove Option" class="btn btn-info btn-sm" onclick="removeRow(this)"></td>
+                <td><input type="button" name="new[removeOption][]" value="Remove Option" class="btn btn-info btn-sm" onclick="removeRow(this)"></td>
             </tr>
         </tbody>
     </table>

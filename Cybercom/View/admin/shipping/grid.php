@@ -8,7 +8,7 @@
 </head>
 <body>
     <h3 class="text-center mt-5">Shipping Records</h3>
-    <div class="container-fluid" style="margin-left:15% ;margin-bottom:20px; margin-top:30px"><a href="<?php echo $this->getUrl('edit');?>" class="btn btn-success font-weight-bold"><i class="fa fa-sm fa-plus"></i> Add</a></div>
+    <div class="container-fluid" style="margin-left:15% ;margin-bottom:20px; margin-top:30px"><a role="button" onclick="object.setUrl('<?php echo $this->getUrl('edit',null,null,true);?>').load()" class="btn btn-success font-weight-bold"><i class="fa fa-sm fa-plus"></i> Add</a></div>
     <div class="container-fluid text-center d-flex justify-content-center ">
 
     <table class="table table-bordered" style="width:70%">
@@ -39,8 +39,8 @@
                 <td><?php echo $val->status; ?></td>
                 <td><?php echo $val->createdDate; ?></td>
                 <td><?php echo $val->updatedDate; ?></td>
-                <td><a href='<?php echo $this->getUrl('edit', null, ['id' => $val->shippingId]) ?>' class="btn btn-info btn-sm">Edit</a>
-                    <a href='<?php echo $this->getUrl('delete', null, ['id' => $val->shippingId]) ?>' class="btn btn-danger btn-sm">Delete</a></td>
+                <td><a role="button" onclick="object.setUrl('<?php echo $this->getUrl('edit', null, ['id' => $val->shippingId]) ?>').load()" class="btn btn-info btn-sm">Edit</a>
+                    <a role="button" onclick="object.setUrl('<?php echo $this->getUrl('delete', null, ['id' => $val->shippingId]) ?>').load()" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
         <?php } endif; ?>
         </table> 

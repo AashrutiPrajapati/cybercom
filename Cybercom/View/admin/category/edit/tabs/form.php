@@ -1,7 +1,8 @@
 <?php
-$category = $this->getTableRow();
-$categoryOptions =$this->getCategoryOptions();
+    $category = $this->getTableRow();
+    $categoryOptions =$this->getCategoryOptions();
 ?>
+
 <form action="<?php echo $this->getUrl('save');?>" method="post">
 <div class="form-group"> 
     <select  name="category[parentId]" >
@@ -37,6 +38,6 @@ $categoryOptions =$this->getCategoryOptions();
             <label class="control-label">Description</label>
             <input type="text" name="category[description]" value="<?php echo $category->description; ?>" class="form-control">
                    
-            <input type="submit" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
+            <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
                 
 </div>

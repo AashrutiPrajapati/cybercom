@@ -1,5 +1,3 @@
-
-
 <div id="contentHtml">
 <?php
     $children = $this->getChildren();

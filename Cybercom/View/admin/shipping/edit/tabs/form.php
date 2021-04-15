@@ -1,6 +1,4 @@
-<?php
-$shipping = $this->getTableRow();
-?>
+<?php $shipping = $this->getTableRow(); ?>
 
 <html>
 <head>
@@ -43,7 +41,7 @@ $shipping = $this->getTableRow();
                                 }
                                 ?>
                         </select>
-                    <input type="submit" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
+                    <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
             </div>
         </form>
     </div>

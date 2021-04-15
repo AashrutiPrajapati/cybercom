@@ -1,6 +1,4 @@
-<?php
-$payment = $this->getTableRow();
-?>
+<?php $payment = $this->getTableRow(); ?>
 
 <html>
 <head>
@@ -47,4 +45,5 @@ $payment = $this->getTableRow();
     </div>
 </body>
 </html>
+
 

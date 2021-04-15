@@ -2,40 +2,40 @@
 <h5 class="text-white">e-Commerce WebSite</h5>
     <ul class="navbar-nav ml-auto">
            <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','dashboard',null,true); ?>').load()">Dashboard</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\dashboard',null,true); ?>').load()">Dashboard</a>
             <!-- <a class="nav-link text-white font-weight-bold" href="<?php //echo $this->getUrl('grid','admin\dashboard',null,true); ?>"> Dashboard</a> -->
             </li>
             <li class="nav-item ">
             <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\product',null,true); ?>"> Product</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\category',null,true); ?>">Category</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\category',null,true); ?>').load()">Category</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\customer',null,true); ?>">Customer</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\customer',null,true); ?>').load()">Customer</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\customerGroup',null,true); ?>">Customer Group</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\customerGroup',null,true); ?>').load()">Customer Group</a>
             </li>
     </ul>
     <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\config\Group',null,true); ?>">Configuration</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\config\Group',null,true); ?>').load()">Configuration</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\shipping',null,true); ?>">Shipping Method</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\shipping',null,true); ?>').load()">Shipping Method</a>
             </li>
             <li class="nav-item">
             <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\payment',null,true); ?>').load()">Payment Method</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\admin',null,true); ?>">Admin</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\admin',null,true); ?>').load()">Admin</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\attribute',null,true); ?>">Attribute</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\attribute',null,true); ?>').load()">Attribute</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" href="<?php echo $this->getUrl('grid','admin\cmsPage',null,true); ?>">Cms Page</a>
+            <a class="nav-link text-white font-weight-bold" onclick="object.setUrl('<?php echo $this->getUrl('grid','admin\cmsPage',null,true); ?>').load()">Cms Page</a>
             </li>
     </ul>
 </nav>

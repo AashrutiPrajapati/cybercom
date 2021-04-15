@@ -1,6 +1,4 @@
-<?php
-$admin = $this->getTableRow();
-?>
+<?php $admin = $this->getTableRow(); ?>
 <html>
 <head>
     <title>Add/Update Admin Details</title>
@@ -36,7 +34,7 @@ $admin = $this->getTableRow();
                                 }
                                 ?>
                         </select>
-                    <input type="submit" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px"> 
+                    <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px"> 
             </div>
         </form>
     </div>

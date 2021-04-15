@@ -1,6 +1,6 @@
 <?php 
-$customer = $this->getTableRow(); 
-$group = $this->getGroup();
+    $customer = $this->getTableRow(); 
+    $group = $this->getGroup();
 ?>
 
 <h3 class="text-center m-5 ">Add/Update Customer Details</h3>
@@ -63,7 +63,7 @@ $group = $this->getGroup();
                         </select>
                     </div>
 
-                    <input type="submit" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
+                    <input type="button" onclick="object.setForm(this).load()" value="Save" class="btn btn-success mt-4 font-weight-bold" style="padding:5px 30px">
                    
                  </div>
             </div>

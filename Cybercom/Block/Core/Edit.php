@@ -7,6 +7,7 @@ class Edit extends Template
     protected $tab = NULL;
     protected $tableRow = null;
     protected $tabClass = null;
+    protected $request = null;
 
     public function __construct() {
         $this->setTemplate('./View/core/edit.php');

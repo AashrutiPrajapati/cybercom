@@ -9,7 +9,7 @@ class Tabs extends \Block\Core\Edit\Tabs
     {
         $this->addTab('product',['label' => 'Product Information','block' => 'Block\Admin\Product\Edit\Tabs\Form']);
         
-        if($id = $_GET['id']) {
+        if($id = $this->getRequest()->getGet('id')) {
             $this->addTab('media',['label' => 'Media','block' => 'Block\Admin\Product\Edit\Tabs\Media']);
             $this->addTab('category',['label' => 'Category','block' => 'Block\Admin\Product\Edit\Tabs\Category']); 
             $this->addTab('groupPrice',['label' => 'Group Price','block' => 'Block\Admin\Product\Edit\Tabs\GroupPrice']);

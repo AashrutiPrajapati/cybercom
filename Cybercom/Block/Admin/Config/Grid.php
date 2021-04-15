@@ -10,7 +10,7 @@ class Grid extends \Block\Core\Template
         $this->setTemplate('./View/admin/config/grid.php');
     }
 
-    public function setConfigGroups($configs = NULL) 
+    public function setConfigGroups($configGroups = NULL) 
     {
         if(!$configGroups) {
             $configGroups = \Mage::getModel('Model\Config\Group')->fetchAll();

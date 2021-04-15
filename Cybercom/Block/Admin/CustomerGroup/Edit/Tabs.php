@@ -1,0 +1,16 @@
+<?php
+namespace Block\Admin\CustomerGroup\Edit;
+
+class Tabs extends \Block\Core\Edit\Tabs
+{
+    
+    public function prepareTabs()
+    {
+        $this->addTab('customerGroup',['label' => 'Information','block' => 'Block\Admin\CustomerGroup\Edit\Tabs\Form']);
+        
+        $this->setDefaultTab('customerGroup');
+        return $this;
+    }
+
+}
+?>

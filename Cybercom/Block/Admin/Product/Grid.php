@@ -1,7 +1,9 @@
 <?php
 namespace Block\Admin\Product;
 
-class Grid extends \Block\Core\Grid{
+class Grid extends \Block\Core\Grid
+{
+    protected $filter = null;
 
     public function getTitle()
     {

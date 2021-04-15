@@ -1,7 +1,6 @@
 <?php
 namespace Block\Core;
 
-
 class Template 
 {
     protected $template = NULL;
@@ -82,7 +81,7 @@ class Template
 
     public function getRequest() 
     {
-        if(!$request){
+        if(!$this->request){
             $this->setRequest();
         }
         return $this->request;

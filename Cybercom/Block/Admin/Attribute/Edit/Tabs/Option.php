@@ -34,28 +34,28 @@ class Option extends \Block\Core\Edit
         return $this->attribute;
     }
 
-    public function setOptions($options = null){
-        if ($options) {
-            $this->$options = $options;
-            return $this;
-        }
-        if($attributeId = $this->getTableRow()->attributeId){
-            $attributeOption = \Mage::getModel('Model\Attribute\Option');
-            $query = "SELECT * FROM {$attributeOption->getTableName()} WHERE `attributeId` = {$attributeId};";
-            $options = $attributeOption->fetchAll($query);
-            if($options){
-                $this->options = $options;
-                return $this;
-            }
-        }
-        $this->options = $options;
-        return $this;
-    }
+    // public function setOptions($options = null){
+    //     if ($options) {
+    //         $this->$options = $options;
+    //         return $this;
+    //     }
+    //     if($attributeId = $this->getTableRow()->attributeId){
+    //         $attributeOption = \Mage::getModel('Model\Attribute\Option');
+    //         $query = "SELECT * FROM {$attributeOption->getTableName()} WHERE `attributeId` = {$attributeId};";
+    //         $options = $attributeOption->fetchAll($query);
+    //         if($options){
+    //             $this->options = $options;
+    //             return $this;
+    //         }
+    //     }
+    //     $this->options = $options;
+    //     return $this;
+    // }
 
-    public function getOptions(){
-        if (!$this->options) {
-            $this->setOptions();
-        }
-        return $this->options;
-    }
+    // public function getOptions(){
+    //     if (!$this->options) {
+    //         $this->setOptions();
+    //     }
+    //     return $this->options;
+    // }
 }

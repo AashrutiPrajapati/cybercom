@@ -6,6 +6,8 @@ class Grid extends \Block\Core\Template{
     protected $columns = [];
     protected $actions = [];
     protected $buttons = [];
+    protected $request = null;
+
 
     public function __construct()
     {
